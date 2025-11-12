@@ -36,7 +36,7 @@ export function Header({ currentSection = 0, onNavigate }) {
             </svg>
           </motion.div>
           <h2 className="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] whitespace-nowrap hidden sm:block">
-            山东菏投科技发展集团
+            {t.brand.name}
           </h2>
         </button>
 
@@ -79,7 +79,7 @@ export function Header({ currentSection = 0, onNavigate }) {
             onClick={toggleLanguage}
           >
             <span className="material-symbols-outlined text-lg">translate</span>
-            <span>{language === 'zh' ? '中文 / EN' : 'EN / 中文'}</span>
+            <span>{language === 'zh' ? t.brand.languageToggle : t.brand.languageToggle}</span>
           </Button>
           <Button className="hidden sm:flex">{t.nav.login}</Button>
 
@@ -135,7 +135,7 @@ export function Header({ currentSection = 0, onNavigate }) {
                 </Button>
                 <Button variant="ghost" className="flex-1" onClick={toggleLanguage}>
                   <span className="material-symbols-outlined text-lg">translate</span>
-                  <span>{language === 'zh' ? '中文 / EN' : 'EN / 中文'}</span>
+                  <span>{language === 'zh' ? t.brand.languageToggle : t.brand.languageToggle}</span>
                 </Button>
                 <Button className="flex-1">{t.nav.login}</Button>
               </div>

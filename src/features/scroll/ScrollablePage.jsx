@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 import { useTheme } from '@/shared/lib/ThemeContext'
 
-// 导入各页面的内容组件
+// Import page content components
 import { HomeContent } from '@/features/home/HomeContent'
 import { AboutContent } from '@/features/about/AboutContent'
 import { SolutionsContent } from '@/features/solutions/SolutionsContent'
@@ -41,7 +41,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
       const targetRect = targetElement.getBoundingClientRect()
       const scrollTop = container.scrollTop
       
-      // 计算需要滚动的距离
+      // 计算目标元素相对于容器的位置
       const targetScrollTop = scrollTop + (targetRect.top - containerRect.top)
       
       container.scrollTo({
@@ -64,7 +64,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
     const container = containerRef.current
     if (!container || sectionRefs.current.length === 0) return
 
-    // 清理之前的observer
+    // Clean up previous observer
     if (observerRef.current) {
       observerRef.current.disconnect()
     }
@@ -204,7 +204,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
       <AnimatePresence>
         {currentSection === 0 && (
           <motion.div
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 flex flex-col items-center gap-2 text-white/80"
+            className="fixed bottom-8 left-0 right-0 z-40 flex flex-col items-center gap-2 text-white/80 mx-auto w-fit"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

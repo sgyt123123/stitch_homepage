@@ -168,55 +168,6 @@ export function HomeContent() {
           </div>
         </div>
       </motion.section>
-
-      <motion.section
-        className="border-t border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark py-20 sm:py-32"
-        id="contact"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white sm:text-4xl">{t.contact.title}</h2>
-              <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-white/70">
-                {t.contact.description}
-              </p>
-            </motion.div>
-            <motion.form
-              className="space-y-6"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <input
-                className="block w-full rounded-md border-0 bg-gray-100 dark:bg-white/5 py-2 px-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm"
-                placeholder={t.contact.namePlaceholder}
-                type="text"
-              />
-              <input
-                className="block w-full rounded-md border-0 bg-gray-100 dark:bg-white/5 py-2 px-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm"
-                placeholder={t.contact.emailPlaceholder}
-                type="email"
-              />
-              <textarea
-                className="block w-full rounded-md border-0 bg-gray-100 dark:bg-white/5 py-2 px-3.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm"
-                placeholder={t.contact.messagePlaceholder}
-                rows="4"
-              />
-              <Button size="lg" className="w-full">{t.contact.submit}</Button>
-            </motion.form>
-          </div>
-        </div>
-      </motion.section>
     </div>
   )
 }

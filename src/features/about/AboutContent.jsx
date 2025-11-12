@@ -48,7 +48,9 @@ export function AboutContent() {
               {t.about.mission.title}
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-base font-normal leading-relaxed pb-3 pt-1 px-4">
-              在<span className="font-bold text-primary">菏投</span>，我们始于一个简单的信念：技术应是人类潜能的延伸，而非替代品。我们的旅程并非始于会议室，而是源于以赋能个人和组织的方式解决复杂问题的共同热情。本节将深入探讨指导我们做出的每一个决策、编写的每一行代码的核心原则，从我们对道德AI的承诺，到我们创造直观、强大且人人可用的工具的热情。
+              {t.about.mission.description.split('山东菏投科技发展集团').join('').split('，我们始于一个简单的信念：技术应是人类潜能的延伸，而非替代品。')[0]}
+              <span className="font-bold text-primary">菏投</span>
+              {t.about.mission.description.split('山东菏投科技发展集团')[1]}
             </p>
           </div>
           <motion.div 
@@ -59,9 +61,9 @@ export function AboutContent() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h1 className="text-gray-900 dark:text-white tracking-tight text-2xl sm:text-4xl font-bold leading-tight px-4 text-center pb-3 pt-6 border-l-4 border-primary">
-              "在<span className="font-bold text-primary">菏投</span>，我们的目标是创造与人类协作的智能体，增强我们的创造力和生产力，而不是取而代之。"
+              "{t.about.mission.quote.replace('菏投', '<span class="font-bold text-primary">菏投</span>')}"
             </h1>
-            <p className="text-center mt-4 text-gray-600 dark:text-gray-400">- 王皓，创始人兼首席执行官</p>
+            <p className="text-center mt-4 text-gray-600 dark:text-gray-400">- {t.about.mission.author}</p>
           </motion.div>
         </motion.section>
 
@@ -91,9 +93,11 @@ export function AboutContent() {
                 <h1 className="mx-auto font-semibold text-sm text-white">1</h1>
               </div>
               <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">2021年：灵感迸发</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[0].year}：{t.about.journey.timeline[0].title}</h3>
                 <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  <span className="font-bold text-primary">菏投</span> 的想法诞生了。一支由充满热情的工程师和设计师组成的小团队，怀着共同的愿景走到了一起。
+                  {t.about.journey.timeline[0].desc.replace('菏投', '').split('的想法诞生了')[0]}
+                  <span className="font-bold text-primary">菏投</span>
+                  的想法诞生了{t.about.journey.timeline[0].desc.split('的想法诞生了')[1]}
                 </p>
               </div>
             </motion.div>
@@ -111,9 +115,9 @@ export function AboutContent() {
                 <h1 className="mx-auto text-white font-semibold text-sm">2</h1>
               </div>
               <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">2022年：首个原型</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[1].year}：{t.about.journey.timeline[1].title}</h3>
                 <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  经过数月不懈的努力，我们推出了第一个功能原型，证明了我们协作式AI的核心概念。
+                  {t.about.journey.timeline[1].desc}
                 </p>
               </div>
             </motion.div>
@@ -131,9 +135,9 @@ export function AboutContent() {
                 <h1 className="mx-auto font-semibold text-sm text-white">3</h1>
               </div>
               <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">2023年：赢得信任</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[2].year}：{t.about.journey.timeline[2].title}</h3>
                 <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  我们成功获得了种子轮融资，这使我们能够扩大团队并加速产品公开发布的进程。
+                  {t.about.journey.timeline[2].desc}
                 </p>
               </div>
             </motion.div>
@@ -151,9 +155,9 @@ export function AboutContent() {
                 <h1 className="mx-auto text-white font-semibold text-sm">4</h1>
               </div>
               <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">2024年：公开发布</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[3].year}：{t.about.journey.timeline[3].title}</h3>
                 <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  我们的平台向公众发布，赋能成千上万的用户通过我们的AI智能体取得更多成就。
+                  {t.about.journey.timeline[3].desc}
                 </p>
               </div>
             </motion.div>
@@ -169,10 +173,10 @@ export function AboutContent() {
         >
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-gray-900 dark:text-white text-2xl sm:text-3xl font-bold leading-tight tracking-tight">
-              我们的企业文化与团队
+              {t.about.team.title}
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
-              我们是一支由创新者、思想家和创造者组成的团队，因一个共同的目标而团结在一起。我们的文化建立在透明、协作和对卓越的不懈追求之上。
+              {t.about.team.description}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -189,8 +193,8 @@ export function AboutContent() {
                 src="/images/team-wang-hao.jpg"
                 alt="Photo of Wang Hao, CEO"
               />
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white">王皓</h3>
-              <p className="text-primary font-medium text-sm">创始人兼首席执行官</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[0].name}</h3>
+              <p className="text-primary font-medium text-sm">{t.about.team.members[0].role}</p>
             </motion.div>
             
             <motion.div
@@ -206,8 +210,8 @@ export function AboutContent() {
                 src="/images/team-li-wei.jpg"
                 alt="Photo of Li Wei, CTO"
               />
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white">李伟</h3>
-              <p className="text-primary font-medium text-sm">首席技术官</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[1].name}</h3>
+              <p className="text-primary font-medium text-sm">{t.about.team.members[1].role}</p>
             </motion.div>
             
             <motion.div
@@ -223,8 +227,8 @@ export function AboutContent() {
                 src="/images/team-zhang-min.jpg"
                 alt="Photo of Zhang Min, Head of Product"
               />
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white">张敏</h3>
-              <p className="text-primary font-medium text-sm">产品负责人</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[2].name}</h3>
+              <p className="text-primary font-medium text-sm">{t.about.team.members[2].role}</p>
             </motion.div>
             
             <motion.div
@@ -240,8 +244,8 @@ export function AboutContent() {
                 src="/images/team-chen-lei.jpg"
                 alt="Photo of Chen Lei, Lead AI Researcher"
               />
-              <h3 className="font-bold text-lg text-gray-900 dark:text-white">陈磊</h3>
-              <p className="text-primary font-medium text-sm">首席AI研究员</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[3].name}</h3>
+              <p className="text-primary font-medium text-sm">{t.about.team.members[3].role}</p>
             </motion.div>
           </div>
         </motion.section>
