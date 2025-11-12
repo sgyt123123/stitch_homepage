@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { Card, CardContent } from '@/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
 const fadeInUp = {
@@ -12,7 +15,7 @@ export function AboutContent() {
   const { t } = useLanguage()
 
   return (
-    <div className="flex-grow bg-background-light dark:bg-background-dark">
+    <div className="flex-grow bg-background">
       <motion.section
         className="relative"
         initial={{ opacity: 0 }}
@@ -47,7 +50,7 @@ export function AboutContent() {
             <h2 className="text-gray-900 dark:text-white text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4">
               {t.about.mission.title}
             </h2>
-            <p className="text-gray-700 dark:text-gray-300 text-base font-normal leading-relaxed pb-3 pt-1 px-4">
+            <p className="text-muted-foreground text-base font-normal leading-relaxed pb-3 pt-1 px-4">
               {t.about.mission.description.split('山东菏投科技发展集团').join('').split('，我们始于一个简单的信念：技术应是人类潜能的延伸，而非替代品。')[0]}
               <span className="font-bold text-primary">菏投</span>
               {t.about.mission.description.split('山东菏投科技发展集团')[1]}
@@ -92,14 +95,19 @@ export function AboutContent() {
               <div className="z-20 flex items-center order-1 bg-primary shadow-xl w-8 h-8 rounded-full">
                 <h1 className="mx-auto font-semibold text-sm text-white">1</h1>
               </div>
-              <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[0].year}：{t.about.journey.timeline[0].title}</h3>
-                <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  {t.about.journey.timeline[0].desc.replace('菏投', '').split('的想法诞生了')[0]}
-                  <span className="font-bold text-primary">菏投</span>
-                  的想法诞生了{t.about.journey.timeline[0].desc.split('的想法诞生了')[1]}
-                </p>
-              </div>
+              <Card className="w-5/12">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{t.about.journey.timeline[0].year}</Badge>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[0].title}</h3>
+                  </div>
+                  <p className="text-sm leading-snug tracking-wide text-muted-foreground">
+                    {t.about.journey.timeline[0].desc.replace('菏投', '').split('的想法诞生了')[0]}
+                    <span className="font-bold text-primary">菏投</span>
+                    的想法诞生了{t.about.journey.timeline[0].desc.split('的想法诞生了')[1]}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* 2022年：首个原型 */}
@@ -114,12 +122,17 @@ export function AboutContent() {
               <div className="z-20 flex items-center order-1 bg-primary shadow-xl w-8 h-8 rounded-full">
                 <h1 className="mx-auto text-white font-semibold text-sm">2</h1>
               </div>
-              <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[1].year}：{t.about.journey.timeline[1].title}</h3>
-                <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  {t.about.journey.timeline[1].desc}
-                </p>
-              </div>
+              <Card className="w-5/12">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{t.about.journey.timeline[1].year}</Badge>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[1].title}</h3>
+                  </div>
+                  <p className="text-sm leading-snug tracking-wide text-muted-foreground">
+                    {t.about.journey.timeline[1].desc}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* 2023年：赢得信任 */}
@@ -134,12 +147,17 @@ export function AboutContent() {
               <div className="z-20 flex items-center order-1 bg-primary shadow-xl w-8 h-8 rounded-full">
                 <h1 className="mx-auto font-semibold text-sm text-white">3</h1>
               </div>
-              <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[2].year}：{t.about.journey.timeline[2].title}</h3>
-                <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  {t.about.journey.timeline[2].desc}
-                </p>
-              </div>
+              <Card className="w-5/12">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{t.about.journey.timeline[2].year}</Badge>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[2].title}</h3>
+                  </div>
+                  <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
+                    {t.about.journey.timeline[2].desc}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* 2024年：公开发布 */}
@@ -154,12 +172,17 @@ export function AboutContent() {
               <div className="z-20 flex items-center order-1 bg-primary shadow-xl w-8 h-8 rounded-full">
                 <h1 className="mx-auto text-white font-semibold text-sm">4</h1>
               </div>
-              <div className="order-1 bg-white dark:bg-gray-800/90 rounded-lg shadow-xl w-5/12 px-6 py-4 border border-gray-200 dark:border-white/10">
-                <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[3].year}：{t.about.journey.timeline[3].title}</h3>
-                <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
-                  {t.about.journey.timeline[3].desc}
-                </p>
-              </div>
+              <Card className="w-5/12">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{t.about.journey.timeline[3].year}</Badge>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg">{t.about.journey.timeline[3].title}</h3>
+                  </div>
+                  <p className="text-sm leading-snug tracking-wide text-gray-700 dark:text-gray-400 text-opacity-100">
+                    {t.about.journey.timeline[3].desc}
+                  </p>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </motion.section>
@@ -175,7 +198,7 @@ export function AboutContent() {
             <h2 className="text-gray-900 dark:text-white text-2xl sm:text-3xl font-bold leading-tight tracking-tight">
               {t.about.team.title}
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
+            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
               {t.about.team.description}
             </p>
           </div>
@@ -188,13 +211,12 @@ export function AboutContent() {
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ y: -10 }}
             >
-              <img 
-                className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg" 
-                src="/images/team-wang-hao.jpg"
-                alt="Photo of Wang Hao, CEO"
-              />
+              <Avatar className="w-32 h-32 mb-4">
+                <AvatarImage src="/images/team-wang-hao.jpg" alt="Photo of Wang Hao, CEO" />
+                <AvatarFallback>WH</AvatarFallback>
+              </Avatar>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[0].name}</h3>
-              <p className="text-primary font-medium text-sm">{t.about.team.members[0].role}</p>
+              <Badge variant="outline" className="mt-1">{t.about.team.members[0].role}</Badge>
             </motion.div>
             
             <motion.div
@@ -205,13 +227,12 @@ export function AboutContent() {
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ y: -10 }}
             >
-              <img 
-                className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg" 
-                src="/images/team-li-wei.jpg"
-                alt="Photo of Li Wei, CTO"
-              />
+              <Avatar className="w-32 h-32 mb-4">
+                <AvatarImage src="/images/team-li-wei.jpg" alt="Photo of Li Wei, CTO" />
+                <AvatarFallback>LW</AvatarFallback>
+              </Avatar>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[1].name}</h3>
-              <p className="text-primary font-medium text-sm">{t.about.team.members[1].role}</p>
+              <Badge variant="outline" className="mt-1">{t.about.team.members[1].role}</Badge>
             </motion.div>
             
             <motion.div
@@ -222,13 +243,12 @@ export function AboutContent() {
               transition={{ duration: 0.6, delay: 0.3 }}
               whileHover={{ y: -10 }}
             >
-              <img 
-                className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg" 
-                src="/images/team-zhang-min.jpg"
-                alt="Photo of Zhang Min, Head of Product"
-              />
+              <Avatar className="w-32 h-32 mb-4">
+                <AvatarImage src="/images/team-zhang-min.jpg" alt="Photo of Zhang Min, Head of Product" />
+                <AvatarFallback>ZM</AvatarFallback>
+              </Avatar>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[2].name}</h3>
-              <p className="text-primary font-medium text-sm">{t.about.team.members[2].role}</p>
+              <Badge variant="outline" className="mt-1">{t.about.team.members[2].role}</Badge>
             </motion.div>
             
             <motion.div
@@ -239,13 +259,12 @@ export function AboutContent() {
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ y: -10 }}
             >
-              <img 
-                className="w-32 h-32 rounded-full object-cover mb-4 shadow-lg" 
-                src="/images/team-chen-lei.jpg"
-                alt="Photo of Chen Lei, Lead AI Researcher"
-              />
+              <Avatar className="w-32 h-32 mb-4">
+                <AvatarImage src="/images/team-chen-lei.jpg" alt="Photo of Chen Lei, Lead AI Researcher" />
+                <AvatarFallback>CL</AvatarFallback>
+              </Avatar>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">{t.about.team.members[3].name}</h3>
-              <p className="text-primary font-medium text-sm">{t.about.team.members[3].role}</p>
+              <Badge variant="outline" className="mt-1">{t.about.team.members[3].role}</Badge>
             </motion.div>
           </div>
         </motion.section>

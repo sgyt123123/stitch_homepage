@@ -21,7 +21,7 @@ export function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="relative w-full min-h-screen bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white transition-colors">
+        <div className="relative w-full min-h-screen bg-background font-display text-foreground transition-colors">
           <Header 
             currentSection={currentSection} 
             onNavigate={handleNavigate}

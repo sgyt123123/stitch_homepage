@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
 const fadeInUp = {
@@ -12,7 +15,7 @@ export function ContactContent() {
   const { t } = useLanguage()
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark pt-20">
+    <div className="min-h-screen bg-background pt-20">
       <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-10 md:py-20">
         <div className="layout-content-container flex flex-col max-w-7xl flex-1">
           {/* Hero Section */}
@@ -27,7 +30,7 @@ export function ContactContent() {
               <p className="text-black dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">
                 {t.contactPage.hero.title}
               </p>
-              <p className="text-gray-500 dark:text-[#9292c9] text-base md:text-lg font-normal leading-normal max-w-2xl">
+              <p className="text-muted-foreground text-base md:text-lg font-normal leading-normal max-w-2xl">
                 {t.contactPage.hero.subtitle}
               </p>
             </div>
@@ -49,56 +52,45 @@ export function ContactContent() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="bg-white dark:bg-[#191933]/50 rounded-xl p-6 md:p-8 border border-gray-200 dark:border-[#323267]">
-                <motion.h2 
-                  className="text-black dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  {t.contactPage.form.title}
-                </motion.h2>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-[22px]">
+                    {t.contactPage.form.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <label className="flex flex-col">
-                      <p className="text-black dark:text-white text-base font-medium leading-normal pb-2">{t.contactPage.form.nameLabel}</p>
-                      <motion.input 
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#323267] bg-background-light dark:bg-[#191933] focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-[#9292c9] p-3 text-base font-normal leading-normal" 
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">{t.contactPage.form.nameLabel}</label>
+                      <Input 
                         placeholder={t.contactPage.form.namePlaceholder} 
                         type="text"
-                        whileFocus={{ scale: 1.01 }}
                       />
-                    </label>
-                    <label className="flex flex-col">
-                      <p className="text-black dark:text-white text-base font-medium leading-normal pb-2">{t.contactPage.form.companyLabel}</p>
-                      <motion.input 
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#323267] bg-background-light dark:bg-[#191933] focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-[#9292c9] p-3 text-base font-normal leading-normal" 
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">{t.contactPage.form.companyLabel}</label>
+                      <Input 
                         placeholder={t.contactPage.form.companyPlaceholder} 
                         type="text"
-                        whileFocus={{ scale: 1.01 }}
                       />
-                    </label>
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <label className="flex flex-col">
-                      <p className="text-black dark:text-white text-base font-medium leading-normal pb-2">{t.contactPage.form.emailLabel}</p>
-                      <motion.input 
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#323267] bg-background-light dark:bg-[#191933] focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-[#9292c9] p-3 text-base font-normal leading-normal" 
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">{t.contactPage.form.emailLabel}</label>
+                      <Input 
                         placeholder="name@company.com" 
                         type="email"
-                        whileFocus={{ scale: 1.01 }}
                       />
-                    </label>
-                    <label className="flex flex-col">
-                      <p className="text-black dark:text-white text-base font-medium leading-normal pb-2">{t.contactPage.form.phoneLabel}</p>
-                      <motion.input 
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-black dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#323267] bg-background-light dark:bg-[#191933] focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-[#9292c9] p-3 text-base font-normal leading-normal" 
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">{t.contactPage.form.phoneLabel}</label>
+                      <Input 
                         placeholder="(123) 456-7890" 
                         type="tel"
-                        whileFocus={{ scale: 1.01 }}
                       />
-                    </label>
+                    </div>
                   </div>
                   <div>
                     <label className="flex flex-col">
@@ -124,17 +116,17 @@ export function ContactContent() {
                     </label>
                   </div>
                   <div>
-                    <motion.button 
-                      className="flex w-full md:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors" 
+                    <Button 
+                      className="w-full md:w-auto min-w-[120px]" 
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      size="lg"
                     >
-                      <span className="truncate">{t.contactPage.form.submit}</span>
-                    </motion.button>
+                      {t.contactPage.form.submit}
+                    </Button>
                   </div>
                 </form>
-              </div>
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* Contact Info */}

@@ -6,20 +6,20 @@ export function Footer() {
 
   return (
     <motion.footer
-      className="bg-background-light dark:bg-background-dark"
+      className="bg-background"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className="mx-auto max-w-7xl border-t border-gray-200 dark:border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl border-t border-border px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-gray-500 dark:text-white/50">{t.footer.copyright}</p>
+          <p className="text-sm text-muted-foreground">{t.footer.copyright}</p>
           <div className="flex items-center gap-6">
-            <a className="text-sm text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white transition-colors" href="#">
+            <a className="text-sm text-muted-foreground hover:text-foreground transition-colors" href="#">
               {t.footer.privacy}
             </a>
-            <a className="text-sm text-gray-500 dark:text-white/50 hover:text-gray-900 dark:hover:text-white transition-colors" href="#">
+            <a className="text-sm text-muted-foreground hover:text-foreground transition-colors" href="#">
               {t.footer.terms}
             </a>
           </div>

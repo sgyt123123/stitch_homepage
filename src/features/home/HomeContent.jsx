@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Button } from '@/shared/components/Button'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
 const fadeInUp = {
@@ -45,13 +46,13 @@ export function HomeContent() {
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2 text-center">
                 <motion.h1
-                  className="text-4xl font-black leading-tight tracking-tighter text-gray-900 dark:text-white sm:text-5xl md:text-6xl"
+                  className="text-4xl font-black leading-tight tracking-tighter text-foreground sm:text-5xl md:text-6xl"
                   {...fadeInUp}
                 >
                   {t.hero.title}
                 </motion.h1>
                 <motion.h2
-                  className="text-base font-normal leading-normal text-gray-700 dark:text-white/80 md:text-lg"
+                  className="text-base font-normal leading-normal text-muted-foreground md:text-lg"
                   {...fadeInUp}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
@@ -73,7 +74,7 @@ export function HomeContent() {
             {...fadeInUp}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <h4 className="text-sm font-bold uppercase leading-normal tracking-widest text-gray-600 dark:text-white/50">{t.hero.partners}</h4>
+            <h4 className="text-sm font-bold uppercase leading-normal tracking-widest text-muted-foreground">{t.hero.partners}</h4>
             <div className="mt-8 grid grid-cols-2 place-items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-5">
               {partnerLogos.map((logo, i) => (
                 <motion.div
@@ -90,7 +91,7 @@ export function HomeContent() {
       </section>
 
       <motion.section
-        className="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-white/10 py-20 sm:py-32"
+        className="bg-muted border-t border-border py-20 sm:py-32"
         id="about"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -129,7 +130,7 @@ export function HomeContent() {
       </motion.section>
 
       <motion.section
-        className="bg-background-light dark:bg-background-dark py-20 sm:py-32"
+        className="bg-muted py-20 sm:py-32"
         id="solutions"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -151,18 +152,21 @@ export function HomeContent() {
             {t.solutions.cards.map((item, i) => (
               <motion.div
                 key={i}
-                className="rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 p-8 hover:bg-white dark:hover:bg-white/10 transition-colors"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white">
-                  <span className="material-symbols-outlined">{item.icon}</span>
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
-                <p className="mt-4 text-base text-gray-600 dark:text-white/70">{item.desc}</p>
+                <Card className="h-full hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-8">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white">
+                      <span className="material-symbols-outlined">{item.icon}</span>
+                    </div>
+                    <h3 className="mt-6 text-xl font-bold text-gray-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-4 text-base text-gray-600 dark:text-white/70">{item.desc}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>

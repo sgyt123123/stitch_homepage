@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 import { useTheme } from '@/shared/lib/ThemeContext'
 
@@ -14,7 +17,7 @@ export function SolutionsContent() {
   const { theme } = useTheme()
 
   return (
-    <div className="flex-grow bg-background-light dark:bg-background-dark text-gray-900 dark:text-[#EAEAEA]">
+    <div className="flex-grow bg-background text-foreground">
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         <div className="layout-container flex h-full grow flex-col">
           <div className="flex flex-1 justify-center px-4 sm:px-8 md:px-20 lg:px-40 py-5">
@@ -48,30 +51,36 @@ export function SolutionsContent() {
                 >
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
                     <motion.div 
-                      className="group flex cursor-pointer flex-col gap-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 transition-all duration-300 hover:border-primary hover:bg-gray-50 dark:hover:bg-primary/10"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.1 }}
                       whileHover={{ y: -5 }}
                     >
-                      <div className="aspect-video w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-black">
-                        <img 
-                          alt="Abstract digital representation of flowing data streams in blue and purple hues."
-                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" 
-                          src="/images/solution-orion.jpg"
-                        />
-                      </div>
-                      <div className="flex flex-col items-start gap-4">
-                        <div className="flex flex-col gap-1">
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t.solutions.solutionsPage.products[0].title}</h3>
-                          <p className="text-base text-gray-600 dark:text-[#EAEAEA]">{t.solutions.solutionsPage.products[0].desc}</p>
-                        </div>
-                        <div className="flex items-center gap-2 text-primary">
-                          <span className="text-sm font-bold">{t.solutions.solutionsPage.products[0].learnMore}</span>
-                          <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
-                        </div>
-                      </div>
+                      <Card className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-primary">
+                        <CardContent className="p-6">
+                          <div className="aspect-video w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-black mb-4">
+                            <img 
+                              alt="Abstract digital representation of flowing data streams in blue and purple hues."
+                              className="h-ffull object-cover transition-transform duration-300 group-hover:scale-105" 
+                              src="/images/solution-orion.jpg"
+                            />
+                          </div>
+                          <div className="flex flex-col items-start gap-4">
+                            <div className="flex flex-col gap-2">
+                              <div className="flex items-center gap-2">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{t.solutions.solutionsPage.products[0].title}</h3>
+                                <Badge variant="secondary">AI</Badge>
+                              </div>
+                              <p className="text-base text-gray-600 dark:text-[#EAEAEA]">{t.solutions.solutionsPage.products[0].desc}</p>
+                            </div>
+                            <Button variant="ghost" className="p-0 h-auto text-primary hover:text-primary/80">
+                              <span className="text-sm font-bold">{t.solutions.solutionsPage.products[0].learnMore}</span>
+                              <span className="material-symbols-outlined ml-1 transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </motion.div>
 
                     <motion.div 
@@ -178,13 +187,9 @@ export function SolutionsContent() {
                       <p className="max-w-[720px] text-base font-normal leading-normal text-gray-600 dark:text-[#EAEAEA]">{t.solutions.solutionsPage.cta.subtitle}</p>
                     </div>
                     <div className="flex justify-center">
-                      <motion.button 
-                        className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-opacity hover:opacity-90"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <span className="truncate">{t.solutions.solutionsPage.cta.button}</span>
-                      </motion.button>
+                      <Button size="lg" className="min-w-[120px]">
+                        {t.solutions.solutionsPage.cta.button}
+                      </Button>
                     </div>
                   </motion.div>
                 </motion.section>

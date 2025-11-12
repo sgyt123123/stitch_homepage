@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/shared/lib/ThemeContext'
 import { useLanguage } from '@/shared/lib/LanguageContext'
-import { Button } from './Button'
+import { Button } from '@/components/ui/button'
 
 export function Header({ currentSection = 0, onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -22,10 +22,10 @@ export function Header({ currentSection = 0, onNavigate }) {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background-dark/80 backdrop-blur-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border"
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 lg:px-8">
-        <button onClick={() => onNavigate?.(0)} className="flex flex-shrink-0 items-center gap-4 text-gray-900 dark:text-white">
+        <button onClick={() => onNavigate?.(0)} className="flex flex-shrink-0 items-center gap-4 text-foreground">
           <motion.div
             className="h-8 w-8 text-primary"
             whileHover={{ rotate: 360 }}
@@ -35,7 +35,7 @@ export function Header({ currentSection = 0, onNavigate }) {
               <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor" />
             </svg>
           </motion.div>
-          <h2 className="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] whitespace-nowrap hidden sm:block">
+          <h2 className="text-foreground text-lg font-bold leading-tight tracking-[-0.015em] whitespace-nowrap hidden sm:block">
             {t.brand.name}
           </h2>
         </button>
@@ -46,7 +46,7 @@ export function Header({ currentSection = 0, onNavigate }) {
             <button
               key={item.section}
               className={`text-sm font-medium leading-normal transition-colors relative ${
-                isActiveSection(item.section) ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-white/80 hover:text-gray-900 dark:hover:text-white'
+                isActiveSection(item.section) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
               }`}
               onClick={() => onNavigate?.(item.section)}
             >
@@ -104,7 +104,7 @@ export function Header({ currentSection = 0, onNavigate }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-white/10 bg-background-light dark:bg-background-dark"
+            className="md:hidden border-b border-border bg-background"
           >
             <nav className="flex flex-col px-4 py-4 gap-4">
               {navItems.map((item, index) => (
@@ -116,7 +116,7 @@ export function Header({ currentSection = 0, onNavigate }) {
                 >
                   <button
                     className={`block py-2 text-base font-medium transition-colors w-full text-left ${
-                      isActiveSection(item.section) ? 'text-primary' : 'text-gray-600 dark:text-white/80'
+                      isActiveSection(item.section) ? 'text-primary' : 'text-muted-foreground'
                     }`}
                     onClick={() => {
                       onNavigate?.(item.section)
