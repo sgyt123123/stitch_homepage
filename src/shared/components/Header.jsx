@@ -1,24 +1,22 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/shared/lib/ThemeContext'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 import { Button } from './Button'
 
-export function Header() {
+export function Header({ currentSection = 0, onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const location = useLocation()
   const { theme, toggleTheme } = useTheme()
   const { language, toggleLanguage, t } = useLanguage()
 
   const navItems = [
-    { path: '/', label: t.nav.home },
-    { path: '/about', label: t.nav.about },
-    { path: '/solutions', label: t.nav.solutions },
-    { path: '/contact', label: t.nav.contact },
+    { section: 0, label: t.nav.home },
+    { section: 1, label: t.nav.about },
+    { section: 2, label: t.nav.solutions },
+    { section: 3, label: t.nav.contact },
   ]
 
-  const isActivePath = (path) => location.pathname === path
+  const isActiveSection = (section) => currentSection === section
 
   return (
     <motion.header
@@ -27,7 +25,7 @@ export function Header() {
       className="fixed top-0 left-0 right-0 z-50 bg-background-dark/80 backdrop-blur-sm"
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex flex-shrink-0 items-center gap-4 text-gray-900 dark:text-white">
+        <button onClick={() => onNavigate?.(0)} className="flex flex-shrink-0 items-center gap-4 text-gray-900 dark:text-white">
           <motion.div
             className="h-8 w-8 text-primary"
             whileHover={{ rotate: 360 }}
@@ -38,29 +36,29 @@ export function Header() {
             </svg>
           </motion.div>
           <h2 className="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] whitespace-nowrap hidden sm:block">
-            山东菏投科技发展集团有限公司
+            山东菏投科技发展集团
           </h2>
-        </Link>
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
+            <button
+              key={item.section}
               className={`text-sm font-medium leading-normal transition-colors relative ${
-                isActivePath(item.path) ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-white/80 hover:text-gray-900 dark:hover:text-white'
+                isActiveSection(item.section) ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-white/80 hover:text-gray-900 dark:hover:text-white'
               }`}
-              to={item.path}
+              onClick={() => onNavigate?.(item.section)}
             >
               {item.label}
-              {isActivePath(item.path) && (
+              {isActiveSection(item.section) && (
                 <motion.div
                   layoutId="activeNav"
                   className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}
-            </Link>
+            </button>
           ))}
         </nav>
 
@@ -111,20 +109,22 @@ export function Header() {
             <nav className="flex flex-col px-4 py-4 gap-4">
               {navItems.map((item, index) => (
                 <motion.div
-                  key={item.path}
+                  key={item.section}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link
-                    className={`block py-2 text-base font-medium transition-colors ${
-                      isActivePath(item.path) ? 'text-primary' : 'text-gray-600 dark:text-white/80'
+                  <button
+                    className={`block py-2 text-base font-medium transition-colors w-full text-left ${
+                      isActiveSection(item.section) ? 'text-primary' : 'text-gray-600 dark:text-white/80'
                     }`}
-                    to={item.path}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      onNavigate?.(item.section)
+                      setMobileMenuOpen(false)
+                    }}
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
               <div className="flex gap-2 pt-2">
