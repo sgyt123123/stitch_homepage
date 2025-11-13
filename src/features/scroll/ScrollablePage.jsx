@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
+import { useState, useEffect, useRef, useCallback, memo, useImperativeHandle } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
-import { useTheme } from '@/shared/lib/ThemeContext'
+import { useNavigation } from '@/shared/lib/NavigationContext'
 
 // Import page content components
 import { HomeContent } from '@/features/home/HomeContent'
@@ -10,8 +10,14 @@ import { AboutContent } from '@/features/about/AboutContent'
 import { SolutionsContent } from '@/features/solutions/SolutionsContent'
 import { ContactContent } from '@/features/contact/ContactContent'
 
-// 导航指示器组件
-const NavigationDot = ({ section, index, currentSection, isScrolling, onClick }) => {
+// ✓ 使用 memo 优化导航指示器组件，避免不必要的重新渲染
+const NavigationDot = memo(function NavigationDot({
+  section,
+  index,
+  currentSection,
+  isScrolling,
+  onClick,
+}) {
   const isActive = currentSection === index
 
   return (
@@ -50,10 +56,10 @@ const NavigationDot = ({ section, index, currentSection, isScrolling, onClick })
       </motion.div>
     </motion.div>
   )
-}
+})
 
 // 滚动提示组件
-const ScrollHint = () => (
+const ScrollHint = ({ t }) => (
   <motion.div
     className="fixed bottom-8 left-0 right-0 z-40 flex flex-col items-center gap-2 mx-auto w-fit"
     initial={{ opacity: 0, y: 20 }}
@@ -62,7 +68,7 @@ const ScrollHint = () => (
     transition={{ duration: 0.6, delay: 2 }}
   >
     <Badge variant="secondary" className="text-xs">
-      向下滚动探索更多
+      {t.hero.scrollHint}
     </Badge>
     <motion.div
       animate={{ y: [0, 8, 0] }}
@@ -78,13 +84,14 @@ const ScrollHint = () => (
   </motion.div>
 )
 
-export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChange }, ref) {
+export function ScrollablePage() {
   const [currentSection, setCurrentSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const containerRef = useRef(null)
   const sectionRefs = useRef([])
   const observerRef = useRef(null)
   const { t } = useLanguage()
+  const { handleSectionChange, scrollableRef } = useNavigation()
 
   const sections = [
     { id: 'home', component: HomeContent, name: t.nav.home },
@@ -94,33 +101,36 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
   ]
 
   // 滚动到指定section
-  const scrollToSection = (index) => {
-    if (isScrolling || !sectionRefs.current[index]) return
+  const scrollToSection = useCallback(
+    (index) => {
+      if (isScrolling || !sectionRefs.current[index]) return
 
-    setIsScrolling(true)
+      setIsScrolling(true)
 
-    const targetElement = sectionRefs.current[index]
-    const container = containerRef.current
+      const targetElement = sectionRefs.current[index]
+      const container = containerRef.current
 
-    if (container && targetElement) {
-      const containerRect = container.getBoundingClientRect()
-      const targetRect = targetElement.getBoundingClientRect()
-      const scrollTop = container.scrollTop
+      if (container && targetElement) {
+        const containerRect = container.getBoundingClientRect()
+        const targetRect = targetElement.getBoundingClientRect()
+        const scrollTop = container.scrollTop
 
-      const targetScrollTop = scrollTop + (targetRect.top - containerRect.top)
+        const targetScrollTop = scrollTop + (targetRect.top - containerRect.top)
 
-      container.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      })
-    }
+        container.scrollTo({
+          top: targetScrollTop,
+          behavior: 'smooth',
+        })
+      }
 
-    setTimeout(() => setIsScrolling(false), 800)
-  }
+      setTimeout(() => setIsScrolling(false), 800)
+    },
+    [isScrolling]
+  )
 
-  // 暴露方法给父组件
-  useImperativeHandle(ref, () => ({
-    scrollToSection
+  // 暴露方法给NavigationContext
+  useImperativeHandle(scrollableRef, () => ({
+    scrollToSection,
   }))
 
   // 使用 Intersection Observer API 监听section可见性
@@ -142,7 +152,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio > maxVisibility) {
             maxVisibility = entry.intersectionRatio
-            const index = sectionRefs.current.findIndex(ref => ref === entry.target)
+            const index = sectionRefs.current.findIndex((ref) => ref === entry.target)
             if (index !== -1) {
               mostVisibleIndex = index
             }
@@ -151,13 +161,13 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
 
         if (mostVisibleIndex !== currentSection) {
           setCurrentSection(mostVisibleIndex)
-          onSectionChange?.(mostVisibleIndex)
+          handleSectionChange(mostVisibleIndex)
         }
       },
       {
         root: container,
         threshold: [0.1, 0.5, 0.9],
-        rootMargin: '-10% 0px -10% 0px'
+        rootMargin: '-10% 0px -10% 0px',
       }
     )
 
@@ -172,7 +182,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
         observerRef.current.disconnect()
       }
     }
-  }, [isScrolling, currentSection, onSectionChange])
+  }, [isScrolling, currentSection, handleSectionChange])
 
   // 键盘导航
   useEffect(() => {
@@ -188,15 +198,12 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentSection, sections.length])
+  }, [currentSection, sections.length, scrollToSection])
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* 滚动容器 */}
-      <div
-        ref={containerRef}
-        className="w-full h-full overflow-y-auto scroll-smooth"
-      >
+      <div ref={containerRef} className="w-full h-full overflow-y-auto scroll-smooth">
         {sections.map((section, index) => {
           const Component = section.component
           return (
@@ -232,9 +239,7 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
       </motion.nav>
 
       {/* 滚动提示 */}
-      <AnimatePresence>
-        {currentSection === 0 && <ScrollHint />}
-      </AnimatePresence>
+      <AnimatePresence>{currentSection === 0 && <ScrollHint t={t} />}</AnimatePresence>
 
       {/* 进度指示器 */}
       <div className="fixed top-0 left-0 w-full h-1 bg-muted z-50">
@@ -247,4 +252,4 @@ export const ScrollablePage = forwardRef(function ScrollablePage({ onSectionChan
       </div>
     </div>
   )
-})
+}

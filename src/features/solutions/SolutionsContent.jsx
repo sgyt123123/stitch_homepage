@@ -4,13 +4,6 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
-}
-
 // 产品卡片组件
 const ProductCard = ({ product, index, hasAIBadge = false }) => {
   return (
@@ -61,29 +54,29 @@ export function SolutionsContent() {
       desc: t.solutions.solutionsPage.products[0].desc,
       learnMore: t.solutions.solutionsPage.products[0].learnMore,
       image: '/images/solution-orion.jpg',
-      hasAIBadge: true
+      hasAIBadge: true,
     },
     {
       title: t.solutions.solutionsPage.products[1].title,
       desc: t.solutions.solutionsPage.products[1].desc,
       learnMore: t.solutions.solutionsPage.products[1].learnMore,
       image: '/images/solution-nexus.jpg',
-      hasAIBadge: false
+      hasAIBadge: false,
     },
     {
       title: t.solutions.solutionsPage.products[2].title,
       desc: t.solutions.solutionsPage.products[2].desc,
       learnMore: t.solutions.solutionsPage.products[2].learnMore,
       image: '/images/solution-synapse.jpg',
-      hasAIBadge: false
+      hasAIBadge: false,
     },
     {
       title: t.solutions.solutionsPage.products[3].title,
       desc: t.solutions.solutionsPage.products[3].desc,
       learnMore: t.solutions.solutionsPage.products[3].learnMore,
       image: '/images/solution-quantum.jpg',
-      hasAIBadge: false
-    }
+      hasAIBadge: false,
+    },
   ]
 
   return (

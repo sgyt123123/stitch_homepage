@@ -1,59 +1,57 @@
-'use client';
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
-import { cn } from '@/lib/utils';
+'use client'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
+import { motion, useSpring, useTransform } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
-export function Spotlight({
-  className,
-  size = 200,
-  springOptions = { bounce: 0 },
-}) {
-  const containerRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [parentElement, setParentElement] = useState(null);
+export function Spotlight({ className, size = 200, springOptions = { bounce: 0 } }) {
+  const containerRef = useRef(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [parentElement, setParentElement] = useState(null)
 
-  const mouseX = useSpring(0, springOptions);
-  const mouseY = useSpring(0, springOptions);
+  const mouseX = useSpring(0, springOptions)
+  const mouseY = useSpring(0, springOptions)
 
-  const spotlightLeft = useTransform(mouseX, (x) => `${x - size / 2}px`);
-  const spotlightTop = useTransform(mouseY, (y) => `${y - size / 2}px`);
+  const spotlightLeft = useTransform(mouseX, (x) => `${x - size / 2}px`)
+  const spotlightTop = useTransform(mouseY, (y) => `${y - size / 2}px`)
 
   useEffect(() => {
     if (containerRef.current) {
-      const parent = containerRef.current.parentElement;
+      const parent = containerRef.current.parentElement
       if (parent) {
-        parent.style.position = 'relative';
-        parent.style.overflow = 'hidden';
-        setParentElement(parent);
+        parent.style.position = 'relative'
+        parent.style.overflow = 'hidden'
+        setParentElement(parent)
       }
     }
-  }, []);
+  }, [])
 
   const handleMouseMove = useCallback(
     (event) => {
-      if (!parentElement) return;
-      const { left, top } = parentElement.getBoundingClientRect();
-      mouseX.set(event.clientX - left);
-      mouseY.set(event.clientY - top);
+      if (!parentElement) return
+      const { left, top } = parentElement.getBoundingClientRect()
+      mouseX.set(event.clientX - left)
+      mouseY.set(event.clientY - top)
     },
     [mouseX, mouseY, parentElement]
-  );
+  )
+
+  // ✓ 修复：使用 useCallback 保存回调函数引用，避免内存泄漏
+  const handleMouseEnter = useCallback(() => setIsHovered(true), [])
+  const handleMouseLeave = useCallback(() => setIsHovered(false), [])
 
   useEffect(() => {
-    if (!parentElement) return;
+    if (!parentElement) return
 
-    parentElement.addEventListener('mousemove', handleMouseMove);
-    parentElement.addEventListener('mouseenter', () => setIsHovered(true));
-    parentElement.addEventListener('mouseleave', () => setIsHovered(false));
+    parentElement.addEventListener('mousemove', handleMouseMove)
+    parentElement.addEventListener('mouseenter', handleMouseEnter)
+    parentElement.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
-      parentElement.removeEventListener('mousemove', handleMouseMove);
-      parentElement.removeEventListener('mouseenter', () => setIsHovered(true));
-      parentElement.removeEventListener('mouseleave', () =>
-        setIsHovered(false)
-      );
-    };
-  }, [parentElement, handleMouseMove]);
+      parentElement.removeEventListener('mousemove', handleMouseMove)
+      parentElement.removeEventListener('mouseenter', handleMouseEnter)
+      parentElement.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [parentElement, handleMouseMove, handleMouseEnter, handleMouseLeave])
 
   return (
     <motion.div
@@ -71,5 +69,5 @@ export function Spotlight({
         top: spotlightTop,
       }}
     />
-  );
+  )
 }

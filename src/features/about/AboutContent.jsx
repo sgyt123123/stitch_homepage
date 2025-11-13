@@ -3,16 +3,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6 }
-}
+import { fadeInUp, fadeIn } from '@/shared/lib/animations'
 
 // 时间线项组件
-const TimelineItem = ({ item, index, isRight }) => {
+const TimelineItem = ({ index, isRight }) => {
   const { t } = useLanguage()
   const timelineData = t.about.journey.timeline[index]
 
@@ -30,7 +24,9 @@ const TimelineItem = ({ item, index, isRight }) => {
       </div>
 
       {/* 卡片 - 根据方向靠左或靠右 */}
-      <Card className={`w-5/12 hover:shadow-lg transition-shadow duration-300 border-border ${isRight ? 'ml-auto' : 'mr-auto'}`}>
+      <Card
+        className={`w-5/12 hover:shadow-lg transition-shadow duration-300 border-border ${isRight ? 'ml-auto' : 'mr-auto'}`}
+      >
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="secondary">{timelineData.year}</Badge>
@@ -47,7 +43,10 @@ const TimelineItem = ({ item, index, isRight }) => {
 
 // 团队成员卡片组件
 const TeamMember = ({ member, index }) => {
-  const initials = member.name.split(' ').map(n => n[0]).join('')
+  const initials = member.name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
 
   return (
     <motion.div
@@ -63,7 +62,9 @@ const TeamMember = ({ member, index }) => {
         <AvatarFallback className="text-2xl">{initials}</AvatarFallback>
       </Avatar>
       <h3 className="font-bold text-lg text-foreground">{member.name}</h3>
-      <Badge variant="outline" className="mt-2">{member.role}</Badge>
+      <Badge variant="outline" className="mt-2">
+        {member.role}
+      </Badge>
     </motion.div>
   )
 }
@@ -73,10 +74,26 @@ export function AboutContent() {
 
   // 团队成员数据
   const teamMembers = [
-    { name: t.about.team.members[0].name, role: t.about.team.members[0].role, image: '/images/team-wang-hao.jpg' },
-    { name: t.about.team.members[1].name, role: t.about.team.members[1].role, image: '/images/team-li-wei.jpg' },
-    { name: t.about.team.members[2].name, role: t.about.team.members[2].role, image: '/images/team-zhang-min.jpg' },
-    { name: t.about.team.members[3].name, role: t.about.team.members[3].role, image: '/images/team-chen-lei.jpg' },
+    {
+      name: t.about.team.members[0].name,
+      role: t.about.team.members[0].role,
+      image: '/images/team-wang-hao.jpg',
+    },
+    {
+      name: t.about.team.members[1].name,
+      role: t.about.team.members[1].role,
+      image: '/images/team-li-wei.jpg',
+    },
+    {
+      name: t.about.team.members[2].name,
+      role: t.about.team.members[2].role,
+      image: '/images/team-zhang-min.jpg',
+    },
+    {
+      name: t.about.team.members[3].name,
+      role: t.about.team.members[3].role,
+      image: '/images/team-chen-lei.jpg',
+    },
   ]
 
   return (
@@ -91,7 +108,8 @@ export function AboutContent() {
         <div
           className="flex min-h-[50vh] flex-col items-center justify-center gap-6 bg-cover bg-center bg-no-repeat p-4 text-center"
           style={{
-            backgroundImage: 'linear-gradient(rgba(16, 16, 34, 0.8) 0%, rgba(16, 16, 34, 0.9) 100%), url("/images/hero-background.jpg")',
+            backgroundImage:
+              'linear-gradient(rgba(16, 16, 34, 0.8) 0%, rgba(16, 16, 34, 0.9) 100%), url("/images/hero-background.jpg")',
           }}
         >
           <motion.div
@@ -130,7 +148,7 @@ export function AboutContent() {
           >
             <blockquote className="border-l-4 border-primary pl-4 py-2">
               <p className="text-foreground tracking-tight text-2xl sm:text-4xl font-bold leading-tight">
-                "{t.about.mission.quote}"
+                &ldquo;{t.about.mission.quote}&rdquo;
               </p>
               <footer className="text-center mt-4 text-muted-foreground">
                 - {t.about.mission.author}
