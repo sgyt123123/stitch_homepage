@@ -4,7 +4,7 @@ import { useTheme } from '@/shared/lib/ThemeContext'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 import { Button } from '@/components/ui/button'
 
-export function Header({ currentSection = 0, onNavigate }) {
+export function Header({ currentSection = 0, onNavigate, onNavigateToDemo }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const { language, toggleLanguage, t } = useLanguage()
@@ -24,7 +24,7 @@ export function Header({ currentSection = 0, onNavigate }) {
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border"
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between border-b border-white/10 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <button onClick={() => onNavigate?.(0)} className="flex flex-shrink-0 items-center gap-4 text-foreground">
           <motion.div
             className="h-8 w-8 text-primary"
@@ -60,6 +60,13 @@ export function Header({ currentSection = 0, onNavigate }) {
               )}
             </button>
           ))}
+          <Button
+            variant="outline"
+            className="text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-white"
+            onClick={onNavigateToDemo}
+          >
+            3D 演示
+          </Button>
         </nav>
 
         <div className="flex items-center justify-end gap-2">
@@ -127,6 +134,21 @@ export function Header({ currentSection = 0, onNavigate }) {
                   </button>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+              >
+                <button
+                  className="block py-2 text-base font-medium text-purple-400 w-full text-left"
+                  onClick={() => {
+                    onNavigateToDemo?.()
+                    setMobileMenuOpen(false)
+                  }}
+                >
+                  3D 演示
+                </button>
+              </motion.div>
               <div className="flex gap-2 pt-2">
                 <Button variant="ghost" size="icon" onClick={toggleTheme}>
                   <span className="material-symbols-outlined text-lg">
