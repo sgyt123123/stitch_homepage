@@ -17,7 +17,7 @@ export function HeroSection({ t, partnerLogos, PartnerLogo }) {
         >
           <div className="w-full h-full" style={{ transform: 'translateX(200px)' }}>
             <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              scene="/assets/models/scene.splinecode"
               className="w-full h-full"
             />
           </div>

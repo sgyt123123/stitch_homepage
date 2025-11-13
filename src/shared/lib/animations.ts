@@ -57,7 +57,7 @@ export const staggerContainer: AnimationVariant = {
     transition: {
       staggerChildren: 0.1,
     },
-  },
+  } as any,
 }
 
 // 交错容器（带延迟）
@@ -68,7 +68,7 @@ export const staggerContainerWithDelay: AnimationVariant = {
       delayChildren: 0.3,
     },
   },
-}
+} as any
 
 // 悬停缩放效果
 export const hoverScale: AnimationVariant = {

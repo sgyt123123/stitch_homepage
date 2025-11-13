@@ -148,18 +148,49 @@ export interface LocaleData {
       content: string
     }
   }
+  about: {
+    hero: {
+      title: string
+      subtitle: string
+    }
+    story: {
+      subtitle: string
+      title: string
+      paragraphs: string[]
+    }
+    values: {
+      subtitle: string
+      title: string
+      items: Array<{
+        icon: string
+        title: string
+        description: string
+      }>
+    }
+    team: {
+      subtitle: string
+      title: string
+      members: Array<{
+        name: string
+        role: string
+        bio: string
+        avatar: string
+      }>
+    }
+  }
 }
 
 // 动画相关类型
 export interface AnimationVariant {
-  initial?: Record<string, any>
-  animate?: Record<string, any>
-  whileInView?: Record<string, any>
-  whileHover?: Record<string, any>
-  whileTap?: Record<string, any>
-  viewport?: Record<string, any>
-  transition?: Record<string, any>
-  exit?: Record<string, any>
+  initial?: Record<string, string | number>
+  animate?: Record<string, string | number | object>
+  whileInView?: Record<string, string | number>
+  whileHover?: Record<string, string | number>
+  whileTap?: Record<string, string | number>
+  viewport?: Record<string, string | number | boolean>
+  transition?: Record<string, string | number | boolean | object>
+  exit?: Record<string, string | number>
+  [key: string]: string | number | boolean | object | undefined
 }
 
 // 机器人场景类型

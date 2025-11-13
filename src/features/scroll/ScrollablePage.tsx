@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 import { useNavigation } from '@/shared/lib/NavigationContext'
+import { NavigationDotProps } from '@/types'
 
 // Import page content components
 import { HomeContent } from '@/features/home/HomeContent'
@@ -17,7 +18,7 @@ const NavigationDot = memo(function NavigationDot({
   currentSection,
   isScrolling,
   onClick,
-}) {
+}: NavigationDotProps) {
   const isActive = currentSection === index
 
   return (
@@ -59,7 +60,7 @@ const NavigationDot = memo(function NavigationDot({
 })
 
 // 滚动提示组件
-const ScrollHint = ({ t }) => (
+const ScrollHint = ({ t }: { t: any }) => (
   <motion.div
     className="fixed bottom-8 left-0 right-0 z-40 flex flex-col items-center gap-2 mx-auto w-fit"
     initial={{ opacity: 0, y: 20 }}
@@ -209,7 +210,9 @@ export function ScrollablePage() {
           return (
             <section
               key={section.id}
-              ref={(el) => (sectionRefs.current[index] = el)}
+              ref={(el) => {
+                sectionRefs.current[index] = el
+              }}
               className="w-full min-h-screen flex-shrink-0 relative"
             >
               <Component />

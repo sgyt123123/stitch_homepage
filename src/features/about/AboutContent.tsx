@@ -177,7 +177,6 @@ export function AboutContent() {
             {[0, 1, 2, 3].map((index) => (
               <TimelineItem
                 key={index}
-                item={t.about.journey.timeline[index]}
                 index={index}
                 isRight={index % 2 === 0}
               />

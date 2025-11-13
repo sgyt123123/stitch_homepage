@@ -49,7 +49,7 @@ export function ContactInfoSection({ t }) {
         <img
           className="w-full h-full object-cover"
           alt="一张风格化的深色主题地图，显示了城市区域中的一个图钉位置。"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKdlsy7BokvtbcGhRuOGaRazfaapEGu63gI4hiNauctZwJIncuaPJJNIXp5GGgQcsaivUJ81t9Z53Sy-idYrqln7LCwFw4M79j4MgyZwKVIn4CsU-Yd-MV3RyXJ40WTcctddgZ4fP0QHOTxAihKDrz13w3vmzfhde4FRDvj-xjI71xpW3Wy0uobkyL4R_4DrLkBaPfa1lnQrjI5bz8EADOEp773vZQXvUsCGUEQxEP6qyMusZADsbWdEYqILW4Myycm7w1iBpIBzMl"
+          src="/assets/images/google_avatar.jpg"
         />
       </motion.div>
     </motion.div>

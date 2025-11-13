@@ -4,7 +4,7 @@ import type { PartnerLogoProps } from '@/types'
 
 export function PartnerLogo({ logo, index, universityName }: PartnerLogoProps) {
   return (
-    <motion.div className="group relative" {...logoAnimation(index)}>
+    <motion.div className="group relative" {...(logoAnimation(index) as any)}>
       {/* Logo容器背景 */}
       <div className="relative bg-background/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 h-28 w-32 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:border-primary/30">
         {/* 背景装饰 */}

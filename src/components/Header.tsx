@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 export const Header = memo(function Header() {
   const { theme, toggleTheme } = useTheme()
-  const { language, toggleLanguage, t } = useLanguage()
+  const { toggleLanguage, t } = useLanguage()
   const { currentSection, scrollToSection } = useNavigation()
 
   // ✓ 使用 useMemo 缓存导航项，避免每次渲染都重新创建
@@ -23,7 +23,7 @@ export const Header = memo(function Header() {
   )
 
   // ✓ 使用 useCallback 缓存函数，避免子组件不必要的重新渲染
-  const isActiveSection = useCallback((section) => currentSection === section, [currentSection])
+  const isActiveSection = useCallback((section: number) => currentSection === section, [currentSection])
 
   return (
     <motion.header
@@ -78,28 +78,24 @@ export const Header = memo(function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2">
-          <Button variant="ghost" size="icon" className="hidden sm:flex" onClick={toggleTheme}>
+          <Button {...({ variant: "ghost", size: "icon", className: "hidden sm:flex", onClick: toggleTheme } as any)}>
             <span className="material-symbols-outlined text-lg">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>
           </Button>
-          <Button
-            variant="ghost"
-            className="h-10 px-3 gap-2 hidden lg:flex"
-            onClick={toggleLanguage}
-          >
+          <Button {...({ variant: "ghost", className: "h-10 px-3 gap-2 hidden lg:flex", onClick: toggleLanguage } as any)}>
             <span className="material-symbols-outlined text-lg">translate</span>
           </Button>
-          <Button className="hidden sm:flex">{t.nav.login}</Button>
+          <Button {...({ className: "hidden sm:flex" } as any)}>{t.nav.login}</Button>
 
           {/* Mobile Menu - 简化版 */}
-          <Sheet>
+          <Sheet {...({} as any)}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button {...({ variant: "ghost", size: "icon", className: "md:hidden" } as any)}>
                 <span className="material-symbols-outlined text-lg">menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px]">
+            <SheetContent {...({ side: "right", className: "w-[280px]" } as any)}>
               <nav className="flex flex-col gap-2 mt-8">
                 {navItems.map((item, index) => (
                   <motion.button
@@ -118,13 +114,13 @@ export const Header = memo(function Header() {
                   </motion.button>
                 ))}
                 <div className="flex gap-2 pt-4 border-t border-border">
-                  <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                  <Button {...({ variant: "ghost", size: "icon", onClick: toggleTheme } as any)}>
                     <span className="material-symbols-outlined">dark_mode</span>
                   </Button>
-                  <Button variant="ghost" size="icon" onClick={toggleLanguage}>
+                  <Button {...({ variant: "ghost", size: "icon", onClick: toggleLanguage } as any)}>
                     <span className="material-symbols-outlined">translate</span>
                   </Button>
-                  <Button className="flex-1">{t.nav.login}</Button>
+                  <Button {...({ className: "flex-1" } as any)}>{t.nav.login}</Button>
                 </div>
               </nav>
             </SheetContent>
