@@ -7,7 +7,13 @@
  * - 使用组合而非继承
  */
 import * as React from 'react'
-import { motion, useMotionValue, useSpring, useTransform, type HTMLMotionProps } from 'framer-motion'
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type HTMLMotionProps,
+} from 'framer-motion'
 import {
   CardHeader,
   CardFooter,
@@ -116,10 +122,7 @@ export const AnimatedCard = React.forwardRef<HTMLDivElement, AnimatedCardProps>(
       >
         {/* Spotlight 跟随效果 */}
         {withSpotlight && (
-          <Spotlight
-            size={spotlightSize}
-            className="from-primary/20 via-primary/10"
-          />
+          <Spotlight size={spotlightSize} className="from-primary/20 via-primary/10" />
         )}
 
         {/* 边框光晕 */}

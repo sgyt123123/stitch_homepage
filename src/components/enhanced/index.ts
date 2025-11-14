@@ -17,3 +17,6 @@ export {
   CardContent,
 } from './animated-card'
 export type { AnimatedCardProps } from './animated-card'
+
+export { ParticleBackground } from './ParticleBackground'
+export type { ParticleBackgroundProps } from './ParticleBackground'

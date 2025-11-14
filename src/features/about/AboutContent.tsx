@@ -44,7 +44,13 @@ const TimelineItem = ({ index, isRight }: { index: number; isRight: boolean }) =
 }
 
 // 团队成员卡片组件
-const TeamMember = ({ member, index }: { member: { name: string; role: string; image: string }; index: number }) => {
+const TeamMember = ({
+  member,
+  index,
+}: {
+  member: { name: string; role: string; image: string }
+  index: number
+}) => {
   const initials = member.name
     .split(' ')
     .map((n) => n[0])
@@ -99,7 +105,7 @@ export function AboutContent() {
   ]
 
   return (
-    <div className="flex-grow bg-background">
+    <div className="flex-grow">
       {/* Hero Section */}
       <motion.section
         className="relative"
@@ -177,11 +183,7 @@ export function AboutContent() {
             />
 
             {[0, 1, 2, 3].map((index) => (
-              <TimelineItem
-                key={index}
-                index={index}
-                isRight={index % 2 === 0}
-              />
+              <TimelineItem key={index} index={index} isRight={index % 2 === 0} />
             ))}
           </div>
         </motion.section>

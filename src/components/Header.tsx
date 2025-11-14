@@ -23,7 +23,10 @@ export const Header = memo(function Header() {
   )
 
   // ✓ 使用 useCallback 缓存函数，避免子组件不必要的重新渲染
-  const isActiveSection = useCallback((section: number) => currentSection === section, [currentSection])
+  const isActiveSection = useCallback(
+    (section: number) => currentSection === section,
+    [currentSection]
+  )
 
   return (
     <motion.header
@@ -78,12 +81,7 @@ export const Header = memo(function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hidden sm:flex"
-            onClick={toggleTheme}
-          >
+          <Button variant="ghost" size="icon" className="hidden sm:flex" onClick={toggleTheme}>
             <span className="material-symbols-outlined text-lg">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>

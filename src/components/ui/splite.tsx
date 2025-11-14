@@ -8,17 +8,14 @@ interface SplineSceneProps {
 
 export function SplineScene({ scene, className }: SplineSceneProps) {
   return (
-    <Suspense 
+    <Suspense
       fallback={
         <div className="w-full h-full flex items-center justify-center">
           <span className="loader"></span>
         </div>
       }
     >
-      <Spline
-        scene={scene}
-        className={className}
-      />
+      <Spline scene={scene} className={className} />
     </Suspense>
   )
 }

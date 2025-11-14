@@ -38,13 +38,13 @@ const SolutionCard = ({ item, index }: { item: SolutionCardItem; index: number }
         >
           <span className="material-symbols-outlined">{item.icon}</span>
         </motion.div>
-        <h3 className="mt-6 text-xl font-bold text-foreground
-                      group-hover:text-primary transition-colors duration-500">
+        <h3
+          className="mt-6 text-xl font-bold text-foreground
+                      group-hover:text-primary transition-colors duration-500"
+        >
           {item.title}
         </h3>
-        <p className="mt-4 text-base text-muted-foreground leading-relaxed">
-          {item.desc}
-        </p>
+        <p className="mt-4 text-base text-muted-foreground leading-relaxed">{item.desc}</p>
       </CardContent>
     </AnimatedCard>
   </motion.div>
@@ -52,7 +52,7 @@ const SolutionCard = ({ item, index }: { item: SolutionCardItem; index: number }
 
 export function SolutionsPreviewSection({ t }: { t: LocaleData }) {
   return (
-    <motion.section className="bg-background py-20 sm:py-32" id="solutions" {...fadeIn}>
+    <motion.section className="py-20 sm:py-32" id="solutions" {...fadeIn}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div className="mx-auto max-w-2xl text-center" {...fadeInUp}>
           <Badge variant="outline" className="mb-4">
@@ -63,7 +63,7 @@ export function SolutionsPreviewSection({ t }: { t: LocaleData }) {
           </h2>
         </motion.div>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {t.solutions.cards.map((item, i: number) => (
+          {(t.solutions.cards as SolutionCardItem[]).map((item, i: number) => (
             <SolutionCard key={i} item={item} index={i} />
           ))}
         </div>

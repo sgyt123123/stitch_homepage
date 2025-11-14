@@ -2,9 +2,18 @@ import { motion } from 'framer-motion'
 import { AnimatedCard, CardContent, AnimatedButton } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
+import type { Product } from '@/types'
 
 // 产品卡片组件
-const ProductCard = ({ product, index, hasAIBadge = false }: { product: any; index: number; hasAIBadge?: boolean }) => {
+const ProductCard = ({
+  product,
+  index,
+  hasAIBadge = false,
+}: {
+  product: Product
+  index: number
+  hasAIBadge?: boolean
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -34,7 +43,11 @@ const ProductCard = ({ product, index, hasAIBadge = false }: { product: any; ind
               </div>
               <p className="text-base text-muted-foreground">{product.desc}</p>
             </div>
-            <AnimatedButton variant="ghost" className="p-0 h-auto text-primary hover:text-primary/80 group" withShimmer>
+            <AnimatedButton
+              variant="ghost"
+              className="p-0 h-auto text-primary hover:text-primary/80 group"
+              withShimmer
+            >
               <span className="text-sm font-bold">{product.learnMore}</span>
               <span className="material-symbols-outlined ml-1 transition-transform duration-500 group-hover:translate-x-1">
                 arrow_forward
@@ -51,7 +64,7 @@ export function SolutionsContent() {
   const { t } = useLanguage()
 
   // 产品数据配置
-  const products = [
+  const products: Product[] = [
     {
       title: t.solutions.solutionsPage?.products?.[0]?.title || '',
       desc: t.solutions.solutionsPage?.products?.[0]?.desc || '',
@@ -83,7 +96,7 @@ export function SolutionsContent() {
   ]
 
   return (
-    <div className="flex-grow bg-background text-foreground">
+    <div className="flex-grow text-foreground">
       <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         <div className="layout-container flex h-full grow flex-col">
           <div className="flex flex-1 justify-center px-4 sm:px-8 md:px-20 lg:px-40 py-5">
@@ -123,7 +136,7 @@ export function SolutionsContent() {
                         key={product.title}
                         product={product}
                         index={index}
-                        hasAIBadge={product.hasAIBadge}
+                        hasAIBadge={Boolean(product.hasAIBadge)}
                       />
                     ))}
                   </div>

@@ -1,3 +1,5 @@
+import React from 'react'
+
 // 通用类型定义
 export interface BaseComponentProps {
   className?: string
@@ -35,199 +37,65 @@ export interface LanguageContextValue {
   t: LocaleData
 }
 
-// 多语言数据结构
-export interface LocaleData {
-  brand: {
-    name: string
-    slogan: string
-  }
-  nav: {
-    home: string
-    about: string
-    solutions: string
-    contact: string
-    login: string
-  }
-  hero: {
-    title: string
-    subtitle: string
-    demo: string
-    video: string
-    partners: string
-    scrollHint: string
-  }
-  aboutPreview: {
-    subtitle: string
-    title: string
-    description: string
-    items: Array<{
-      icon: string
-      text: string
-    }>
-  }
-  solutions: {
-    subtitle: string
-    title: string
-    cards: Array<{
-      icon: string
-      title: string
-      desc: string
-    }>
-    solutionsPage?: {
-      hero: {
-        title: string
-        subtitle: string
-      }
-      products: Array<{
-        title: string
-        desc: string
-        learnMore: string
-        image: string
-      }>
-      cta: {
-        title: string
-        subtitle: string
-        button: string
-      }
-    }
-  }
-  aboutPage: {
-    hero: {
-      title: string
-      subtitle: string
-    }
-    story: {
-      subtitle: string
-      title: string
-      paragraphs: string[]
-    }
-    values: {
-      subtitle: string
-      title: string
-      items: Array<{
-        icon: string
-        title: string
-        description: string
-      }>
-    }
-    team: {
-      subtitle: string
-      title: string
-      members: Array<{
-        name: string
-        role: string
-        bio: string
-        avatar: string
-      }>
-    }
-  }
-  solutionsPage: {
-    hero: {
-      title: string
-      subtitle: string
-    }
-    categories: Array<{
-      icon: string
-      title: string
-      description: string
-      features: string[]
-    }>
-    cta: {
-      title: string
-      subtitle: string
-      button: string
-    }
-  }
-  contactPage: {
-    hero: {
-      title: string
-      subtitle: string
-    }
-    form: {
-      title: string
-      nameLabel: string
-      namePlaceholder: string
-      companyLabel: string
-      companyPlaceholder: string
-      emailLabel: string
-      phoneLabel: string
-      topicLabel: string
-      topics: string[]
-      messageLabel: string
-      messagePlaceholder: string
-      submit: string
-    }
-    info: {
-      title: string
-    }
-    address: {
-      title: string
-      content: string
-    }
-  }
-  about: {
-    subtitle: string
-    title: string
-    description: string
-    teamCollaboration: string
-    hero: {
-      title: string
-      subtitle: string
-    }
-    story: {
-      subtitle: string
-      title: string
-      paragraphs: string[]
-    }
-    values: {
-      subtitle: string
-      title: string
-      items: Array<{
-        icon: string
-        title: string
-        description: string
-      }>
-    }
-    team: {
-      subtitle: string
-      title: string
-      description: string
-      members: Array<{
-        name: string
-        role: string
-        bio: string
-        avatar: string
-      }>
-    }
-    mission?: {
-      title: string
-      description: string
-      quote: string
-      author: string
-    }
-    journey?: {
-      title: string
-      timeline: Array<{
-        year: string
-        title: string
-        desc: string
-      }>
-    }
-  }
+// 本地化数据接口
+export type LocaleData = Record<string, any>
+
+// 页面布局类型
+export interface LayoutData {
+  navigation: NavigationSection[]
 }
 
-// 动画相关类型已移除，使用 Framer Motion 原生 Variant 类型
+// 滚动相关类型
+export interface ScrollContextValue {
+  currentSection: number
+  scrollToSection: (index: number) => void
+  handleSectionChange: (index: number) => void
+  scrollableRef: React.RefObject<{ scrollToSection: (index: number) => void } | null>
+}
 
-// 机器人场景类型
-export interface RobotScene {
-  id: string
-  name: string
-  url: string
+// UI 组件类型
+export interface UIComponentProps {
+  className?: string
+  children?: React.ReactNode
+}
+
+// Hero 部分类型
+export interface HeroSectionProps {
+  title: string
+  subtitle?: string
+  description?: string
+  ctaText?: string
+  ctaLink?: string
+  secondaryCtaText?: string
+  secondaryCtaLink?: string
+  backgroundVideo?: string
+  backgroundImage?: string
+}
+
+// 特性卡片类型
+export interface FeatureCardProps {
+  icon: string
+  title: string
   description: string
-  category: string
+  index: number
 }
 
-// 组件Props类型
+// 关于我们部分类型
+export interface AboutSectionProps {
+  title: string
+  description: string
+  stats: {
+    label: string
+    value: string
+  }[]
+}
+
+// 合作伙伴类型
+export interface PartnerLogo {
+  logo: string
+  universityName: string
+}
+
 export interface PartnerLogoProps {
   logo: string
   index: number
@@ -258,4 +126,13 @@ export interface NavigationDotProps {
   onClick: () => void
 }
 
-export type ReactComponent = React.ComponentType<any>
+export type ReactComponent = React.ComponentType<Record<string, unknown>>
+
+// 产品信息类型
+export interface Product {
+  title: string
+  desc: string
+  learnMore: string
+  image: string
+  hasAIBadge?: boolean
+}

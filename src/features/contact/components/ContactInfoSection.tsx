@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import { fadeInRight, fadeInUp, scaleIn } from '@/shared/lib/animations'
 import { ContactInfoItem } from './ContactInfoItem'
+import type { LocaleData } from '@/types'
 
-export function ContactInfoSection({ t }: { t: any }) {
+export function ContactInfoSection({ t }: { t: LocaleData }) {
   return (
     <motion.div
       className="lg:col-span-1 space-y-8"
@@ -33,8 +34,8 @@ export function ContactInfoSection({ t }: { t: any }) {
           <div className="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary mt-1 flex-shrink-0">
             <span className="material-symbols-outlined text-xl">location_on</span>
           </div>
-          <p className="text-muted-foreground">
-            <span dangerouslySetInnerHTML={{ __html: t.contactPage.address.content }} />
+          <p className="text-muted-foreground whitespace-pre-line">
+            {String(t.contactPage.address.content).replace(/<br\s*\/?/gi, '\n')}
           </p>
         </div>
       </motion.div>

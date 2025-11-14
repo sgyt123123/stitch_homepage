@@ -1,49 +1,71 @@
 import js from '@eslint/js'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
+import tsParser from '@typescript-eslint/parser'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import a11y from 'eslint-plugin-jsx-a11y'
+import prettierConfig from 'eslint-config-prettier'
 
 export default [
-  js.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
-    ignores: [
-      // 忽略shadcn/ui组件目录
-      'src/components/ui/**/*',
-      // 忽略node_modules
-      'node_modules/**/*',
-    ],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+      parser: tsParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
       },
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.jest,
       },
     },
     plugins: {
-      react,
+      '@typescript-eslint': tsPlugin,
+      react: reactPlugin,
       'react-hooks': reactHooks,
+      'jsx-a11y': a11y,
     },
     rules: {
-      ...react.configs.recommended.rules,
+      ...js.configs.recommended.rules,
+      ...reactPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
+      ...tsPlugin.configs.recommended.rules,
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      'no-debugger': 'error',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true },
+      ],
+      '@typescript-eslint/no-explicit-any': 'error',
       'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      'prefer-const': 'warn',
-      'no-unused-vars': 'warn',
+      'react/jsx-uses-react': 'off',
+      'jsx-a11y/alt-text': 'warn',
+      'jsx-a11y/label-has-associated-control': ['warn', { assert: 'either' }],
+      'jsx-a11y/no-autofocus': 'off',
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
+      react: { version: 'detect' },
     },
   },
+  {
+    files: ['tailwind.config.js', 'postcss.config.js', 'vite.config.js'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    files: ['src/types/index.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    ignores: ['node_modules', 'dist', 'build', 'src/components/ui'],
+  },
+  prettierConfig,
 ]

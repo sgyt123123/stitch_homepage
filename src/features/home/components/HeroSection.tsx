@@ -3,7 +3,8 @@ import { AnimatedButton } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
 import { SplineScene } from '@/components/ui/splite'
 import { fadeInUpLarge, staggerContainer } from '@/shared/lib/animations'
-import type { LocaleData, ReactComponent } from '@/types'
+import type React from 'react'
+import type { LocaleData, PartnerLogoProps } from '@/types'
 
 interface PartnerLogoType {
   logo: string
@@ -13,11 +14,11 @@ interface PartnerLogoType {
 export function HeroSection({
   t,
   partnerLogos,
-  PartnerLogo
+  PartnerLogo,
 }: {
   t: LocaleData
   partnerLogos: PartnerLogoType[]
-  PartnerLogo: ReactComponent
+  PartnerLogo: React.ComponentType<PartnerLogoProps>
 }) {
   return (
     <section className="relative flex min-h-[130vh] w-full flex-col pt-20" id="hero">
@@ -91,8 +92,10 @@ export function HeroSection({
         <div className="lg:hidden absolute top-[100vh] w-full left-0 pointer-events-none z-20">
           <motion.div
             className="text-center pointer-events-none"
-            {...fadeInUpLarge}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <Badge variant="secondary" className="mb-4 pointer-events-none text-sm px-4 py-2">
               {t.hero.partners}
@@ -112,8 +115,8 @@ export function HeroSection({
           className="mx-auto max-w-6xl px-6 text-center pointer-events-none"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
           <Badge variant="secondary" className="mb-4 pointer-events-none text-sm px-4 py-2">
             {t.hero.partners}

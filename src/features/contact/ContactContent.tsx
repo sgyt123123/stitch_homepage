@@ -9,7 +9,7 @@ export function ContactContent() {
   const { t } = useLanguage()
 
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen pt-20">
       <div className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-10 md:py-20">
         <div className="layout-content-container flex flex-col max-w-7xl flex-1">
           <ContactHeroSection t={t} />

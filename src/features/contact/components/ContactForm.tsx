@@ -12,8 +12,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { fadeInLeft, durations } from '@/shared/lib/animations'
+import type { LocaleData } from '@/types'
 
-export function ContactForm({ t }: { t: any }) {
+export function ContactForm({ t }: { t: LocaleData }) {
   return (
     <motion.div
       className="lg:col-span-2"
@@ -43,9 +44,7 @@ export function ContactForm({ t }: { t: any }) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="company">
-                  {t.contactPage.form.companyLabel}
-                </Label>
+                <Label htmlFor="company">{t.contactPage.form.companyLabel}</Label>
                 <Input
                   id="company"
                   placeholder={t.contactPage.form.companyPlaceholder}
@@ -60,22 +59,11 @@ export function ContactForm({ t }: { t: any }) {
                   {t.contactPage.form.emailLabel}
                   <span className="text-destructive text-sm">*</span>
                 </Label>
-                <Input
-                  id="email"
-                  placeholder="name@company.com"
-                  type="email"
-                  required
-                />
+                <Input id="email" placeholder="name@company.com" type="email" required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">
-                  {t.contactPage.form.phoneLabel}
-                </Label>
-                <Input
-                  id="phone"
-                  placeholder="(123) 456-7890"
-                  type="tel"
-                />
+                <Label htmlFor="phone">{t.contactPage.form.phoneLabel}</Label>
+                <Input id="phone" placeholder="(123) 456-7890" type="tel" />
               </div>
             </div>
 
@@ -86,7 +74,7 @@ export function ContactForm({ t }: { t: any }) {
                   <SelectValue placeholder={t.contactPage.form.topics[0]} />
                 </SelectTrigger>
                 <SelectContent>
-                  {t.contactPage.form.topics.map((topic: any, index: number) => (
+                  {t.contactPage.form.topics.map((topic: string, index: number) => (
                     <SelectItem key={index} value={topic}>
                       {topic}
                     </SelectItem>

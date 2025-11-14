@@ -33,20 +33,20 @@ export const easings = {
  * 统一时长标准
  */
 export const durations = {
-  instant: 0.1,   // 100ms - 即时反馈
-  fast: 0.2,      // 200ms - 快速交互
-  normal: 0.3,    // 300ms - 标准过渡
-  slow: 0.5,      // 500ms - 慢速展开
-  slower: 0.8,    // 800ms - 戏剧性入场
+  instant: 0.1, // 100ms - 即时反馈
+  fast: 0.2, // 200ms - 快速交互
+  normal: 0.3, // 300ms - 标准过渡
+  slow: 0.5, // 500ms - 慢速展开
+  slower: 0.8, // 800ms - 戏剧性入场
 } as const
 
 /**
  * Spring 物理配置
  */
 export const springs = {
-  gentle: { type: "spring" as const, stiffness: 300, damping: 30 },
-  snappy: { type: "spring" as const, stiffness: 400, damping: 17 },
-  bouncy: { type: "spring" as const, stiffness: 500, damping: 25 },
+  gentle: { type: 'spring' as const, stiffness: 300, damping: 30 },
+  snappy: { type: 'spring' as const, stiffness: 400, damping: 17 },
+  bouncy: { type: 'spring' as const, stiffness: 500, damping: 25 },
 } as const
 
 /**
@@ -55,46 +55,59 @@ export const springs = {
  * ============================================
  */
 
+/**
+ * 标准动画过渡配置
+ * 建议在组件中使用这些预设
+ */
+export const standardTransition = {
+  duration: durations.slower,
+  ease: easings.decelerate,
+} as const
+
+export const fastTransition = {
+  duration: durations.normal,
+  ease: easings.standard,
+} as const
+
+export const instantTransition = {
+  duration: durations.instant,
+  ease: easings.standard,
+} as const
+
 /** 淡入（向上） */
 export const fadeInUp: Variants = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /** 淡入（向上，大距离 - 用于标题） */
 export const fadeInUpLarge: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /** 淡入（向下） */
 export const fadeInDown: Variants = {
   initial: { opacity: 0, y: -30 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /** 淡入（向左） */
 export const fadeInLeft: Variants = {
   initial: { opacity: 0, x: -50 },
   whileInView: { opacity: 1, x: 0 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /** 淡入（向右） */
 export const fadeInRight: Variants = {
   initial: { opacity: 0, x: 50 },
   whileInView: { opacity: 1, x: 0 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /** 简单淡入 */
 export const fadeIn: Variants = {
   initial: { opacity: 0 },
   whileInView: { opacity: 1 },
-  transition: { duration: durations.slower, ease: easings.decelerate }
 }
 
 /**
@@ -148,7 +161,7 @@ export const hoverLiftSmall: Variants = {
 export const cardHover: Variants = {
   whileHover: {
     y: -8,
-    boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)'
+    boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)',
   },
 }
 
@@ -183,15 +196,31 @@ export const scaleIn: Variants = {
  */
 
 /** Logo 动画（带索引延迟） */
-export const logoAnimation = (_index: number): Variants => ({
+export const logoAnimation = (index: number): Variants => ({
   initial: { opacity: 0, scale: 0.8, y: 20 },
-  whileInView: { opacity: 1, scale: 1, y: 0 },
-  whileHover: { scale: 1.05, y: -5 },
+  whileInView: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: index * 0.1,
+      duration: 0.5,
+      ease: [0.4, 0.0, 0.2, 1],
+    },
+  },
+  whileHover: {
+    scale: 1.05,
+    y: -5,
+    transition: {
+      duration: 0.3,
+      ease: [0.4, 0.0, 0.2, 1],
+    },
+  },
 })
 
 /** 自定义淡入动画（带方向和延迟） */
 export const fadeInWithDelay = (
-  _delay: number = 0,
+  delay: number = 0,
   direction: 'up' | 'down' | 'left' | 'right' = 'up',
   distance: number = 30
 ): Variants => {
@@ -204,15 +233,21 @@ export const fadeInWithDelay = (
 
   return {
     initial: { opacity: 0, ...directions[direction] },
-    whileInView: { opacity: 1, y: 0, x: 0 },
+    whileInView: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      transition: {
+        delay,
+        duration: 0.6,
+        ease: [0.4, 0.0, 0.2, 1],
+      },
+    },
   }
 }
 
 /** 侧滑进入动画 */
-export const slideIn = (
-  direction: 'left' | 'right' = 'left',
-  distance: number = 30
-): Variants => ({
+export const slideIn = (direction: 'left' | 'right' = 'left', distance: number = 30): Variants => ({
   initial: { opacity: 0, x: direction === 'left' ? -distance : distance },
   whileInView: { opacity: 1, x: 0 },
 })
@@ -240,10 +275,11 @@ export const bounceIn: Variants = {
  * 用于组合多个动画效果
  */
 export const mergeVariants = (...variants: Variants[]): Variants => {
-  return variants.reduce((acc, variant) => ({
-    ...acc,
-    ...variant,
-  }), {} as Variants)
+  return variants.reduce(
+    (acc, variant) => ({
+      ...acc,
+      ...variant,
+    }),
+    {} as Variants
+  )
 }
-
-

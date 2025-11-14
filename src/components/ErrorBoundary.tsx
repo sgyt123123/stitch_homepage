@@ -1,26 +1,26 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react'
 
 interface Props {
-  children: ReactNode;
-  fallback?: ReactNode;
+  children: ReactNode
+  fallback?: ReactNode
 }
 
 interface State {
-  hasError: boolean;
-  error?: Error;
+  hasError: boolean
+  error?: Error
 }
 
 export class ErrorBoundary extends Component<Props, State> {
   public override state: State = {
     hasError: false,
-  };
+  }
 
   public static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { hasError: true, error }
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error('Uncaught error:', error, errorInfo)
 
     // 在生产环境中，这里可以发送错误报告到监控服务
     if (import.meta.env.PROD) {
@@ -32,7 +32,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       // 允许自定义错误显示
       if (this.props.fallback) {
-        return this.props.fallback;
+        return this.props.fallback
       }
 
       // 默认错误显示
@@ -56,9 +56,7 @@ export class ErrorBoundary extends Component<Props, State> {
               </svg>
             </div>
             <div className="mt-3 text-center">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                出现了错误
-              </h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white">出现了错误</h3>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 抱歉，应用程序遇到了一个意外错误。请刷新页面重试。
               </p>
@@ -83,9 +81,9 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
           </div>
         </div>
-      );
+      )
     }
 
-    return this.props.children;
+    return this.props.children
   }
 }

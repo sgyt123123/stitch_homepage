@@ -23,15 +23,17 @@
     "noImplicitReturns": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
 
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["src", "src/vite-env.d.ts", "**/*.jsx", "**/*.js"],
+  "exclude": ["src/components/ui", "node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

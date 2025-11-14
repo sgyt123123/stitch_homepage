@@ -9,19 +9,13 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import { springs, durations, easings } from '@/shared/lib/animations'
 import { cn } from '@/lib/utils'
-
-// TODO: 调试 - 临时移除复杂配置以测试基础动画
-// import { springs, durations, easings } from '@/shared/lib/animations'
 
 export interface AnimatedButtonProps extends ButtonProps {
   /** 启用 Shimmer 光泽效果 */
   withShimmer?: boolean
   /** 启用涟漪效果 */
   withRipple?: boolean
-  /** 自定义 Spring 配置 */
-  springConfig?: 'gentle' | 'snappy' | 'bouncy'
 }
 
 /**
@@ -35,23 +29,13 @@ export interface AnimatedButtonProps extends ButtonProps {
  * ```
  */
 export const AnimatedButton = React.forwardRef<HTMLButtonElement, AnimatedButtonProps>(
-  (
-    {
-      className,
-      children,
-      withShimmer = true,
-      withRipple = true, // 改为 true 以默认启用
-      springConfig = 'snappy',
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, children, withShimmer = true, withRipple = true, ...props }, ref) => {
     const [ripples, setRipples] = React.useState<Array<{ x: number; y: number; id: number }>>([])
     const [shimmerKey, setShimmerKey] = React.useState(0)
 
     const handleMouseEnter = () => {
       if (withShimmer) {
-        setShimmerKey(prev => prev + 1) // 切换key强制重启动画
+        setShimmerKey((prev) => prev + 1) // 切换key强制重启动画
       }
     }
 
@@ -88,15 +72,13 @@ export const AnimatedButton = React.forwardRef<HTMLButtonElement, AnimatedButton
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           transition={{
-            type: "spring",
+            type: 'spring',
             stiffness: 400,
             damping: 17,
           }}
         >
           {/* 内容 */}
-          <span className="relative z-20 flex items-center justify-center gap-2">
-            {children}
-          </span>
+          <span className="relative z-20 flex items-center justify-center gap-2">{children}</span>
 
           {/* Shimmer 光泽效果 - 使用 Tailwind CSS 动画 */}
           {withShimmer && (
@@ -149,7 +131,7 @@ export const AnimatedButton = React.forwardRef<HTMLButtonElement, AnimatedButton
                 }}
                 initial={{ scale: 0, opacity: 1 }}
                 animate={{ scale: 3, opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               />
             ))}
         </motion.button>
