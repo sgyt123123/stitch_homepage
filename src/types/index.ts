@@ -90,7 +90,6 @@ export interface LocaleData {
         button: string
       }
     }
-    [key: string]: any
   }
   aboutPage: {
     hero: {
@@ -167,6 +166,10 @@ export interface LocaleData {
     }
   }
   about: {
+    subtitle: string
+    title: string
+    description: string
+    teamCollaboration: string
     hero: {
       title: string
       subtitle: string
@@ -210,7 +213,6 @@ export interface LocaleData {
         desc: string
       }>
     }
-    [key: string]: any
   }
 }
 
@@ -255,3 +257,5 @@ export interface NavigationDotProps {
   isScrolling: boolean
   onClick: () => void
 }
+
+export type ReactComponent = React.ComponentType<any>

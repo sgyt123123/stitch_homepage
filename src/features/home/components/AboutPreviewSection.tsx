@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { fadeInLeft, fadeInRight, fadeIn } from '@/shared/lib/animations'
+import type { LocaleData } from '@/types'
 
-export function AboutPreviewSection({ t }: { t: any }) {
+export function AboutPreviewSection({ t }: { t: LocaleData }) {
   return (
     <motion.section
       className="bg-muted/50 border-t border-border py-20 sm:py-32"

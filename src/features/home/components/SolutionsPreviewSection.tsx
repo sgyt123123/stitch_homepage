@@ -2,9 +2,16 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { fadeIn, fadeInUp } from '@/shared/lib/animations'
+import type { LocaleData } from '@/types'
+
+interface SolutionCardItem {
+  icon: string
+  title: string
+  desc: string
+}
 
 // 解决方案卡片组件
-const SolutionCard = ({ item, index }: { item: any; index: number }) => (
+const SolutionCard = ({ item, index }: { item: SolutionCardItem; index: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +37,7 @@ const SolutionCard = ({ item, index }: { item: any; index: number }) => (
   </motion.div>
 )
 
-export function SolutionsPreviewSection({ t }: { t: any }) {
+export function SolutionsPreviewSection({ t }: { t: LocaleData }) {
   return (
     <motion.section className="bg-background py-20 sm:py-32" id="solutions" {...fadeIn}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,7 +50,7 @@ export function SolutionsPreviewSection({ t }: { t: any }) {
           </h2>
         </motion.div>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {t.solutions.cards.map((item: any, i: number) => (
+          {t.solutions.cards.map((item, i: number) => (
             <SolutionCard key={i} item={item} index={i} />
           ))}
         </div>

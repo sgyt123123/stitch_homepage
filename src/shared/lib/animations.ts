@@ -100,7 +100,7 @@ export const scaleIn: Variants = {
 // Logo动画（带缩放）
 export const logoAnimation = (_index: number): Variants => ({
   initial: { opacity: 0, scale: 0.8, y: 20 },
-  whileInView: { opacity: 0.7, scale: 1, y: 0 },
+  whileInView: { opacity: 1, scale: 1, y: 0 },
   whileHover: { scale: 1.05, y: -5 },
 })
 

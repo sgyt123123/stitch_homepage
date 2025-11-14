@@ -3,8 +3,22 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { SplineScene } from '@/components/ui/splite'
 import { fadeInUpLarge, staggerContainer } from '@/shared/lib/animations'
+import type { LocaleData, ReactComponent } from '@/types'
 
-export function HeroSection({ t, partnerLogos, PartnerLogo }: { t: any; partnerLogos: any[]; PartnerLogo: any }) {
+interface PartnerLogoType {
+  logo: string
+  name: string
+}
+
+export function HeroSection({
+  t,
+  partnerLogos,
+  PartnerLogo
+}: {
+  t: LocaleData
+  partnerLogos: PartnerLogoType[]
+  PartnerLogo: ReactComponent
+}) {
   return (
     <section className="relative flex min-h-screen w-full flex-col pt-20" id="hero">
       {/* 3D机器人背景层 */}
@@ -82,7 +96,7 @@ export function HeroSection({ t, partnerLogos, PartnerLogo }: { t: any; partnerL
               {t.hero.partners}
             </Badge>
             <div className="mt-12 grid grid-cols-2 place-items-center gap-6 sm:gap-8 pointer-events-auto max-w-4xl mx-auto">
-              {partnerLogos.map((partner: any, i: number) => (
+              {partnerLogos.map((partner, i) => (
                 <PartnerLogo key={i} logo={partner.logo} index={i} universityName={partner.name} />
               ))}
             </div>
@@ -103,7 +117,7 @@ export function HeroSection({ t, partnerLogos, PartnerLogo }: { t: any; partnerL
             {t.hero.partners}
           </Badge>
           <div className="mt-10 grid grid-cols-5 place-items-center gap-8 pointer-events-auto">
-            {partnerLogos.map((partner: any, i: number) => (
+            {partnerLogos.map((partner, i) => (
               <PartnerLogo key={i} logo={partner.logo} index={i} universityName={partner.name} />
             ))}
           </div>
