@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { AnimatedButton } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
 import { SplineScene } from '@/components/ui/splite'
 import { fadeInUpLarge, staggerContainer } from '@/shared/lib/animations'
@@ -20,19 +20,19 @@ export function HeroSection({
   PartnerLogo: ReactComponent
 }) {
   return (
-    <section className="relative flex min-h-screen w-full flex-col pt-20" id="hero">
+    <section className="relative flex min-h-[130vh] w-full flex-col pt-20" id="hero">
       {/* 3D机器人背景层 */}
-      <div className="absolute inset-0 z-0 h-full w-full">
+      <div className="absolute inset-0 z-0 h-full w-full pointer-events-none">
         <motion.div
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
+          transition={{ duration: 2, delay: 0.2 }}
           className="relative w-full h-full"
         >
-          <div className="w-full h-full" style={{ transform: 'translateX(200px)' }}>
+          <div className="w-full h-full translate-x-[200px] pointer-events-auto">
             <SplineScene
               scene="/images/models/scene.splinecode"
-              className="w-full h-full"
+              className="w-full h-full pointer-events-auto"
             />
           </div>
         </motion.div>
@@ -58,44 +58,46 @@ export function HeroSection({
               <motion.h2
                 className="text-base font-normal leading-normal text-left text-muted-foreground drop-shadow-lg md:text-lg pointer-events-none"
                 {...fadeInUpLarge}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
                 {t.hero.subtitle}
               </motion.h2>
               <motion.div
                 className="flex flex-wrap items-center gap-3 pointer-events-none"
                 {...fadeInUpLarge}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <Button
+                <AnimatedButton
                   size="lg"
                   className="shadow-2xl hover:shadow-2xl transition-shadow bg-primary/95 hover:bg-primary backdrop-blur-sm border-0 pointer-events-auto z-20 relative"
+                  withShimmer
                 >
                   {t.hero.demo}
-                </Button>
-                <Button
+                </AnimatedButton>
+                <AnimatedButton
                   variant="outline"
                   size="lg"
                   className="shadow-xl hover:shadow-2xl hover:bg-accent/90 backdrop-blur-sm border-border/50 bg-background/80 pointer-events-auto z-20 relative"
+                  withShimmer
                 >
                   {t.hero.video}
-                </Button>
+                </AnimatedButton>
               </motion.div>
             </motion.div>
           </div>
         </div>
 
         {/* 合作伙伴部分 - 在小屏幕上的布局 */}
-        <div className="lg:hidden mt-16 pointer-events-none">
+        <div className="lg:hidden absolute top-[100vh] w-full left-0 pointer-events-none z-20">
           <motion.div
-            className="text-center"
+            className="text-center pointer-events-none"
             {...fadeInUpLarge}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Badge variant="secondary" className="mb-10 pointer-events-auto text-sm px-4 py-2">
+            <Badge variant="secondary" className="mb-4 pointer-events-none text-sm px-4 py-2">
               {t.hero.partners}
             </Badge>
-            <div className="mt-12 grid grid-cols-2 place-items-center gap-6 sm:gap-8 pointer-events-auto max-w-4xl mx-auto">
+            <div className="mt-6 grid grid-cols-2 place-items-center gap-6 sm:gap-8 pointer-events-none max-w-4xl mx-auto">
               {partnerLogos.map((partner, i) => (
                 <PartnerLogo key={i} logo={partner.logo} index={i} universityName={partner.name} />
               ))}
@@ -105,18 +107,18 @@ export function HeroSection({
       </div>
 
       {/* 合作伙伴部分 - 仅在大屏幕上显示 */}
-      <div className="hidden lg:block relative z-10 mt-20 pointer-events-none">
+      <div className="hidden lg:block absolute top-[100vh] w-full left-0 z-20 pointer-events-none">
         <motion.div
-          className="mx-auto max-w-6xl px-6 text-center"
+          className="mx-auto max-w-6xl px-6 text-center pointer-events-none"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
-          <Badge variant="secondary" className="mb-10 pointer-events-auto text-sm px-4 py-2">
+          <Badge variant="secondary" className="mb-4 pointer-events-none text-sm px-4 py-2">
             {t.hero.partners}
           </Badge>
-          <div className="mt-10 grid grid-cols-5 place-items-center gap-8 pointer-events-auto">
+          <div className="mt-6 grid grid-cols-5 place-items-center gap-8 pointer-events-none">
             {partnerLogos.map((partner, i) => (
               <PartnerLogo key={i} logo={partner.logo} index={i} universityName={partner.name} />
             ))}

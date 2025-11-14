@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { AnimatedButton } from '@/components/enhanced'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import {
@@ -11,28 +11,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { fadeInLeft } from '@/shared/lib/animations'
+import { fadeInLeft, durations } from '@/shared/lib/animations'
 
 export function ContactForm({ t }: { t: any }) {
   return (
     <motion.div
       className="lg:col-span-2"
       {...fadeInLeft}
-      transition={{ duration: 0.6, delay: 0.3 }}
+      transition={{ duration: durations.slow, delay: 0.3 }}
     >
       <Card>
         <CardHeader>
-          <CardTitle className="text-[22px]">{t.contactPage.form.title}</CardTitle>
+          <CardTitle className="text-2xl flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary">mail</span>
+            {t.contactPage.form.title}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name">{t.contactPage.form.nameLabel}</Label>
-                <Input id="name" placeholder={t.contactPage.form.namePlaceholder} type="text" />
+                <Label htmlFor="name">
+                  {t.contactPage.form.nameLabel}
+                  <span className="text-destructive text-sm">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  placeholder={t.contactPage.form.namePlaceholder}
+                  type="text"
+                  required
+                />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="company">{t.contactPage.form.companyLabel}</Label>
+                <Label htmlFor="company">
+                  {t.contactPage.form.companyLabel}
+                </Label>
                 <Input
                   id="company"
                   placeholder={t.contactPage.form.companyPlaceholder}
@@ -40,16 +53,32 @@ export function ContactForm({ t }: { t: any }) {
                 />
               </div>
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="email">{t.contactPage.form.emailLabel}</Label>
-                <Input id="email" placeholder="name@company.com" type="email" />
+                <Label htmlFor="email">
+                  {t.contactPage.form.emailLabel}
+                  <span className="text-destructive text-sm">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  placeholder="name@company.com"
+                  type="email"
+                  required
+                />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">{t.contactPage.form.phoneLabel}</Label>
-                <Input id="phone" placeholder="(123) 456-7890" type="tel" />
+                <Label htmlFor="phone">
+                  {t.contactPage.form.phoneLabel}
+                </Label>
+                <Input
+                  id="phone"
+                  placeholder="(123) 456-7890"
+                  type="tel"
+                />
               </div>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="topic">{t.contactPage.form.topicLabel}</Label>
               <Select>
@@ -65,18 +94,30 @@ export function ContactForm({ t }: { t: any }) {
                 </SelectContent>
               </Select>
             </div>
+
             <div className="space-y-2">
-              <Label htmlFor="message">{t.contactPage.form.messageLabel}</Label>
+              <Label htmlFor="message" className="flex items-center gap-1">
+                {t.contactPage.form.messageLabel}
+                <span className="text-destructive text-sm">*</span>
+              </Label>
               <Textarea
                 id="message"
                 placeholder={t.contactPage.form.messagePlaceholder}
                 className="min-h-[120px]"
+                required
               />
             </div>
+
             <div>
-              <Button className="w-full md:w-auto min-w-[120px]" type="submit" size="lg">
+              <AnimatedButton
+                className="w-full md:w-auto min-w-[160px]"
+                type="submit"
+                size="lg"
+                withShimmer
+              >
+                <span className="material-symbols-outlined">send</span>
                 {t.contactPage.form.submit}
-              </Button>
+              </AnimatedButton>
             </div>
           </form>
         </CardContent>

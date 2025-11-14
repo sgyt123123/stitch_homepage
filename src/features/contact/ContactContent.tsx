@@ -17,7 +17,7 @@ export function ContactContent() {
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 mt-12 md:mt-20"
             {...fadeIn}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <ContactForm t={t} />
             <ContactInfoSection t={t} />

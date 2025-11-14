@@ -6,7 +6,7 @@ import globals from 'globals'
 export default [
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     ignores: [
       // 忽略shadcn/ui组件目录
       'src/components/ui/**/*',

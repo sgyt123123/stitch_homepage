@@ -39,7 +39,7 @@ export const Header = memo(function Header() {
           <motion.div
             className="h-8 w-8 text-primary"
             whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
             <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
               <path

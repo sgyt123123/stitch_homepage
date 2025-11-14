@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
+import { AnimatedCard, CardContent } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
-import { fadeIn, fadeInUp } from '@/shared/lib/animations'
+import { fadeIn, fadeInUp, durations, easings, springs } from '@/shared/lib/animations'
 import type { LocaleData } from '@/types'
 
 interface SolutionCardItem {
@@ -15,25 +15,38 @@ const SolutionCard = ({ item, index }: { item: SolutionCardItem; index: number }
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    whileHover={{ y: -8 }}
+    viewport={{ once: false }}
+    transition={{
+      duration: durations.slow,
+      delay: index * 0.08,
+      ease: easings.emphasized,
+    }}
   >
-    <Card className="h-full border-border hover:border-primary hover:shadow-xl transition-all duration-300 group">
+    <AnimatedCard
+      withTilt
+      withSpotlight
+      withGlow
+      className="h-full border-border group transition-colors duration-500
+                 hover:border-primary/50"
+    >
       <CardContent className="p-8">
         <motion.div
-          className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-lg"
+          className="flex h-12 w-12 items-center justify-center rounded-lg
+                     bg-primary text-primary-foreground shadow-lg"
           whileHover={{ scale: 1.1, rotate: 5 }}
-          transition={{ type: 'spring', stiffness: 300 }}
+          transition={springs.bouncy}
         >
           <span className="material-symbols-outlined">{item.icon}</span>
         </motion.div>
-        <h3 className="mt-6 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+        <h3 className="mt-6 text-xl font-bold text-foreground
+                      group-hover:text-primary transition-colors duration-500">
           {item.title}
         </h3>
-        <p className="mt-4 text-base text-muted-foreground leading-relaxed">{item.desc}</p>
+        <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+          {item.desc}
+        </p>
       </CardContent>
-    </Card>
+    </AnimatedCard>
   </motion.div>
 )
 

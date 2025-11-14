@@ -99,8 +99,8 @@ export function AboutPreviewSection({ t }: { t: LocaleData }) {
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: false }}
+                transition={{ duration: 1, delay: 0.3 }}
               >
                 <motion.span
                   className="absolute top-6 left-1/2 transform -translate-x-1/2 material-symbols-outlined text-2xl text-primary/60"
@@ -138,8 +138,8 @@ export function AboutPreviewSection({ t }: { t: LocaleData }) {
               className="absolute inset-0 flex items-end justify-center pb-6 z-10"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.8, delay: 0.5 }}
             >
               <Badge
                 variant="secondary"

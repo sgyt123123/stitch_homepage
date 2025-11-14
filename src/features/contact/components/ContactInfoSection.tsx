@@ -7,10 +7,10 @@ export function ContactInfoSection({ t }: { t: any }) {
     <motion.div
       className="lg:col-span-1 space-y-8"
       {...fadeInRight}
-      transition={{ duration: 0.6, delay: 0.5 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
     >
       {/* Contact Information */}
-      <motion.div {...fadeInUp} transition={{ duration: 0.6, delay: 0.6 }}>
+      <motion.div {...fadeInUp} transition={{ duration: 0.8, delay: 0.6 }}>
         <h3 className="text-foreground text-xl font-bold leading-tight tracking-[-0.015em] mb-4">
           {t.contactPage.info.title}
         </h3>
@@ -25,7 +25,7 @@ export function ContactInfoSection({ t }: { t: any }) {
       </motion.div>
 
       {/* Address */}
-      <motion.div {...fadeInUp} transition={{ duration: 0.6, delay: 0.9 }}>
+      <motion.div {...fadeInUp} transition={{ duration: 0.8, delay: 0.9 }}>
         <h3 className="text-foreground text-xl font-bold leading-tight tracking-[-0.015em] mb-4">
           {t.contactPage.address.title}
         </h3>
@@ -43,7 +43,7 @@ export function ContactInfoSection({ t }: { t: any }) {
       <motion.div
         className="w-full h-64 bg-muted rounded-xl overflow-hidden border border-border"
         {...scaleIn}
-        transition={{ duration: 0.6, delay: 1.0 }}
+        transition={{ duration: 0.8, delay: 1.0 }}
         whileHover={{ scale: 1.02 }}
       >
         <img

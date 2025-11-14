@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
+import { AnimatedCard, CardContent } from '@/components/enhanced'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
@@ -15,8 +15,8 @@ const TimelineItem = ({ index, isRight }: { index: number; isRight: boolean }) =
       className="mb-8 flex items-center w-full relative"
       initial={{ opacity: 0, x: isRight ? 50 : -50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.8, delay: 0.1 * (index + 1) }}
     >
       {/* 数字圆圈 - 绝对定位在中间 */}
       <div className="absolute left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center bg-primary shadow-xl w-8 h-8 rounded-full">
@@ -24,8 +24,10 @@ const TimelineItem = ({ index, isRight }: { index: number; isRight: boolean }) =
       </div>
 
       {/* 卡片 - 根据方向靠左或靠右 */}
-      <Card
-        className={`w-5/12 hover:shadow-lg transition-shadow duration-300 border-border ${isRight ? 'ml-auto' : 'mr-auto'}`}
+      <AnimatedCard
+        withSpotlight
+        withGlow
+        className={`w-5/12 hover:shadow-lg transition-shadow duration-500 border-border ${isRight ? 'ml-auto' : 'mr-auto'}`}
       >
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-2">
@@ -36,7 +38,7 @@ const TimelineItem = ({ index, isRight }: { index: number; isRight: boolean }) =
             {timelineData?.desc}
           </p>
         </CardContent>
-      </Card>
+      </AnimatedCard>
     </motion.div>
   )
 }
@@ -53,8 +55,8 @@ const TeamMember = ({ member, index }: { member: { name: string; role: string; i
       className="flex flex-col items-center text-center group"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.8, delay: 0.1 * (index + 1) }}
       whileHover={{ y: -10 }}
     >
       <Avatar className="w-32 h-32 mb-4 ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all">
@@ -103,7 +105,7 @@ export function AboutContent() {
         className="relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8 }}
       >
         <div
           className="flex min-h-[50vh] flex-col items-center justify-center gap-6 bg-cover bg-center bg-no-repeat p-4 text-center"
@@ -143,8 +145,8 @@ export function AboutContent() {
             className="max-w-4xl mx-auto mt-12 sm:mt-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <blockquote className="border-l-4 border-primary pl-4 py-2">
               <p className="text-foreground tracking-tight text-2xl sm:text-4xl font-bold leading-tight">
@@ -162,8 +164,8 @@ export function AboutContent() {
           className="mb-20 sm:mb-32"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8 }}
         >
           <h2 className="text-foreground text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-center mb-12 sm:mb-16">
             {t.about.journey?.title || ''}
@@ -189,8 +191,8 @@ export function AboutContent() {
           className="mb-20 sm:mb-32"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8 }}
         >
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-foreground text-2xl sm:text-3xl font-bold leading-tight tracking-tight">

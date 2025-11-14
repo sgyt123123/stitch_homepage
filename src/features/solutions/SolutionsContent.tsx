@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { AnimatedCard, CardContent, AnimatedButton } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
@@ -10,16 +9,20 @@ const ProductCard = ({ product, index, hasAIBadge = false }: { product: any; ind
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
       whileHover={{ y: -5 }}
     >
-      <Card className="group h-full cursor-pointer border-border hover:border-primary hover:bg-accent transition-all duration-300">
+      <AnimatedCard
+        withSpotlight
+        withGlow
+        className="group h-full cursor-pointer border-border hover:border-primary transition-all duration-500"
+      >
         <CardContent className="p-6">
           <div className="aspect-video w-full overflow-hidden rounded-lg bg-muted mb-4">
             <img
               alt={product.title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               src={product.image}
             />
           </div>
@@ -31,15 +34,15 @@ const ProductCard = ({ product, index, hasAIBadge = false }: { product: any; ind
               </div>
               <p className="text-base text-muted-foreground">{product.desc}</p>
             </div>
-            <Button variant="ghost" className="p-0 h-auto text-primary hover:text-primary/80 group">
+            <AnimatedButton variant="ghost" className="p-0 h-auto text-primary hover:text-primary/80 group" withShimmer>
               <span className="text-sm font-bold">{product.learnMore}</span>
-              <span className="material-symbols-outlined ml-1 transition-transform duration-300 group-hover:translate-x-1">
+              <span className="material-symbols-outlined ml-1 transition-transform duration-500 group-hover:translate-x-1">
                 arrow_forward
               </span>
-            </Button>
+            </AnimatedButton>
           </div>
         </CardContent>
-      </Card>
+      </AnimatedCard>
     </motion.div>
   )
 }
@@ -91,8 +94,8 @@ export function SolutionsContent() {
                   className="@container"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.8 }}
                 >
                   <div className="flex flex-col gap-6 px-4 py-10 text-center @[480px]:gap-8 items-center">
                     <div className="flex flex-col gap-2">
@@ -111,8 +114,8 @@ export function SolutionsContent() {
                   className="@container"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.8 }}
                 >
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
                     {products.map((product, index) => (
@@ -131,15 +134,15 @@ export function SolutionsContent() {
                   className="@container"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.8 }}
                 >
                   <motion.div
                     className="flex flex-col items-center justify-end gap-6 rounded-xl bg-muted px-4 py-10 text-center @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
                   >
                     <div className="flex flex-col items-center gap-2">
                       <h1 className="max-w-[720px] text-3xl font-bold leading-tight tracking-tight text-foreground @[480px]:text-4xl @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
@@ -150,9 +153,9 @@ export function SolutionsContent() {
                       </p>
                     </div>
                     <div className="flex justify-center">
-                      <Button size="lg" className="min-w-[120px]">
+                      <AnimatedButton size="lg" className="min-w-[120px]" withShimmer>
                         {t.solutions.solutionsPage?.cta?.button || ''}
-                      </Button>
+                      </AnimatedButton>
                     </div>
                   </motion.div>
                 </motion.section>

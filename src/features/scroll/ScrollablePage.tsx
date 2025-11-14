@@ -25,7 +25,7 @@ const NavigationDot = memo(function NavigationDot({
     <motion.div className="relative group">
       <motion.button
         onClick={onClick}
-        className={`w-3 h-3 rounded-full border-2 transition-all duration-300 relative ${
+        className={`w-3 h-3 rounded-full border-2 transition-all duration-500 relative ${
           isActive
             ? 'bg-primary border-primary scale-125 shadow-lg shadow-primary/50'
             : 'bg-transparent border-muted-foreground/40 hover:border-primary hover:scale-110'
@@ -66,7 +66,7 @@ const ScrollHint = ({ t }: { t: LocaleData }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
-    transition={{ duration: 0.6, delay: 2 }}
+    transition={{ duration: 0.8, delay: 2 }}
   >
     <Badge variant="secondary" className="text-xs">
       {t.hero.scrollHint}
@@ -250,7 +250,7 @@ export function ScrollablePage() {
           className="h-full bg-gradient-to-r from-primary to-primary/80"
           initial={{ width: '0%' }}
           animate={{ width: `${((currentSection + 1) / sections.length) * 100}%` }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
         />
       </div>
     </div>
