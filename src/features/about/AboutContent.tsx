@@ -3,12 +3,12 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
-import { fadeInUp, fadeIn } from '@/shared/lib/animations'
+import { fadeInUp } from '@/shared/lib/animations'
 
 // 时间线项组件
-const TimelineItem = ({ index, isRight }) => {
+const TimelineItem = ({ index, isRight }: { index: number; isRight: boolean }) => {
   const { t } = useLanguage()
-  const timelineData = t.about.journey.timeline[index]
+  const timelineData = t.about.journey?.timeline?.[index]
 
   return (
     <motion.div
@@ -29,11 +29,11 @@ const TimelineItem = ({ index, isRight }) => {
       >
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-2">
-            <Badge variant="secondary">{timelineData.year}</Badge>
-            <h3 className="font-bold text-foreground text-lg">{timelineData.title}</h3>
+            <Badge variant="secondary">{timelineData?.year}</Badge>
+            <h3 className="font-bold text-foreground text-lg">{timelineData?.title}</h3>
           </div>
           <p className="text-sm leading-snug tracking-wide text-muted-foreground">
-            {timelineData.desc}
+            {timelineData?.desc}
           </p>
         </CardContent>
       </Card>
@@ -42,7 +42,7 @@ const TimelineItem = ({ index, isRight }) => {
 }
 
 // 团队成员卡片组件
-const TeamMember = ({ member, index }) => {
+const TeamMember = ({ member, index }: { member: { name: string; role: string; image: string }; index: number }) => {
   const initials = member.name
     .split(' ')
     .map((n) => n[0])
@@ -75,23 +75,23 @@ export function AboutContent() {
   // 团队成员数据
   const teamMembers = [
     {
-      name: t.about.team.members[0].name,
-      role: t.about.team.members[0].role,
+      name: t.about.team.members?.[0]?.name || '',
+      role: t.about.team.members?.[0]?.role || '',
       image: '/images/team-wang-hao.jpg',
     },
     {
-      name: t.about.team.members[1].name,
-      role: t.about.team.members[1].role,
+      name: t.about.team.members?.[1]?.name || '',
+      role: t.about.team.members?.[1]?.role || '',
       image: '/images/team-li-wei.jpg',
     },
     {
-      name: t.about.team.members[2].name,
-      role: t.about.team.members[2].role,
+      name: t.about.team.members?.[2]?.name || '',
+      role: t.about.team.members?.[2]?.role || '',
       image: '/images/team-zhang-min.jpg',
     },
     {
-      name: t.about.team.members[3].name,
-      role: t.about.team.members[3].role,
+      name: t.about.team.members?.[3]?.name || '',
+      role: t.about.team.members?.[3]?.role || '',
       image: '/images/team-chen-lei.jpg',
     },
   ]
@@ -133,10 +133,10 @@ export function AboutContent() {
         <motion.section className="mb-20 sm:mb-32" {...fadeInUp}>
           <div className="max-w-3xl mx-auto">
             <h2 className="text-foreground text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4">
-              {t.about.mission.title}
+              {t.about.mission?.title || ''}
             </h2>
             <p className="text-muted-foreground text-base font-normal leading-relaxed pb-3 pt-1 px-4">
-              {t.about.mission.description}
+              {t.about.mission?.description || ''}
             </p>
           </div>
           <motion.div
@@ -148,10 +148,10 @@ export function AboutContent() {
           >
             <blockquote className="border-l-4 border-primary pl-4 py-2">
               <p className="text-foreground tracking-tight text-2xl sm:text-4xl font-bold leading-tight">
-                &ldquo;{t.about.mission.quote}&rdquo;
+                &ldquo;{t.about.mission?.quote || ''}&rdquo;
               </p>
               <footer className="text-center mt-4 text-muted-foreground">
-                - {t.about.mission.author}
+                - {t.about.mission?.author || ''}
               </footer>
             </blockquote>
           </motion.div>
@@ -166,7 +166,7 @@ export function AboutContent() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-foreground text-2xl sm:text-3xl font-bold leading-tight tracking-tight text-center mb-12 sm:mb-16">
-            {t.about.journey.title}
+            {t.about.journey?.title || ''}
           </h2>
           <div className="relative wrap overflow-hidden p-4 sm:p-10 h-full">
             <div

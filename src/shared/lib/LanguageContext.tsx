@@ -2,6 +2,8 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 import { translations } from './locales'
 import type { Language, LanguageContextValue } from '@/types'
 
+const translationsTyped = translations
+
 const LanguageContext = createContext<LanguageContextValue | undefined>(undefined)
 
 interface LanguageProviderProps {
@@ -22,7 +24,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     localStorage.setItem('language', newLang)
   }
 
-  const t = translations[language]
+  const t = translationsTyped[language]
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>

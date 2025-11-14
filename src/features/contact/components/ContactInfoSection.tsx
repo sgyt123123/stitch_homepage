@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { fadeInRight, fadeInUp, scaleIn } from '@/shared/lib/animations'
 import { ContactInfoItem } from './ContactInfoItem'
 
-export function ContactInfoSection({ t }) {
+export function ContactInfoSection({ t }: { t: any }) {
   return (
     <motion.div
       className="lg:col-span-1 space-y-8"
@@ -49,7 +49,7 @@ export function ContactInfoSection({ t }) {
         <img
           className="w-full h-full object-cover"
           alt="一张风格化的深色主题地图，显示了城市区域中的一个图钉位置。"
-          src="/assets/images/google_avatar.jpg"
+          src="/images/google_avatar.jpg"
         />
       </motion.div>
     </motion.div>

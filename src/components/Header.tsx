@@ -78,24 +78,33 @@ export const Header = memo(function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-2">
-          <Button {...({ variant: "ghost", size: "icon", className: "hidden sm:flex", onClick: toggleTheme } as any)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden sm:flex"
+            onClick={toggleTheme}
+          >
             <span className="material-symbols-outlined text-lg">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>
           </Button>
-          <Button {...({ variant: "ghost", className: "h-10 px-3 gap-2 hidden lg:flex", onClick: toggleLanguage } as any)}>
+          <Button
+            variant="ghost"
+            className="h-10 px-3 gap-2 hidden lg:flex"
+            onClick={toggleLanguage}
+          >
             <span className="material-symbols-outlined text-lg">translate</span>
           </Button>
-          <Button {...({ className: "hidden sm:flex" } as any)}>{t.nav.login}</Button>
+          <Button className="hidden sm:flex">{t.nav.login}</Button>
 
           {/* Mobile Menu - 简化版 */}
-          <Sheet {...({} as any)}>
+          <Sheet>
             <SheetTrigger asChild>
-              <Button {...({ variant: "ghost", size: "icon", className: "md:hidden" } as any)}>
+              <Button variant="ghost" size="icon" className="md:hidden">
                 <span className="material-symbols-outlined text-lg">menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent {...({ side: "right", className: "w-[280px]" } as any)}>
+            <SheetContent side="right" className="w-[280px]">
               <nav className="flex flex-col gap-2 mt-8">
                 {navItems.map((item, index) => (
                   <motion.button
@@ -114,13 +123,13 @@ export const Header = memo(function Header() {
                   </motion.button>
                 ))}
                 <div className="flex gap-2 pt-4 border-t border-border">
-                  <Button {...({ variant: "ghost", size: "icon", onClick: toggleTheme } as any)}>
+                  <Button variant="ghost" size="icon" onClick={toggleTheme}>
                     <span className="material-symbols-outlined">dark_mode</span>
                   </Button>
-                  <Button {...({ variant: "ghost", size: "icon", onClick: toggleLanguage } as any)}>
+                  <Button variant="ghost" size="icon" onClick={toggleLanguage}>
                     <span className="material-symbols-outlined">translate</span>
                   </Button>
-                  <Button {...({ className: "flex-1" } as any)}>{t.nav.login}</Button>
+                  <Button className="flex-1">{t.nav.login}</Button>
                 </div>
               </nav>
             </SheetContent>

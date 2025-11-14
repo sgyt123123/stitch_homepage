@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/shared/lib/LanguageContext'
 
 // 产品卡片组件
-const ProductCard = ({ product, index, hasAIBadge = false }) => {
+const ProductCard = ({ product, index, hasAIBadge = false }: { product: any; index: number; hasAIBadge?: boolean }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -50,30 +50,30 @@ export function SolutionsContent() {
   // 产品数据配置
   const products = [
     {
-      title: t.solutions.solutionsPage.products[0].title,
-      desc: t.solutions.solutionsPage.products[0].desc,
-      learnMore: t.solutions.solutionsPage.products[0].learnMore,
+      title: t.solutions.solutionsPage?.products?.[0]?.title || '',
+      desc: t.solutions.solutionsPage?.products?.[0]?.desc || '',
+      learnMore: t.solutions.solutionsPage?.products?.[0]?.learnMore || '',
       image: '/images/solution-orion.jpg',
       hasAIBadge: true,
     },
     {
-      title: t.solutions.solutionsPage.products[1].title,
-      desc: t.solutions.solutionsPage.products[1].desc,
-      learnMore: t.solutions.solutionsPage.products[1].learnMore,
+      title: t.solutions.solutionsPage?.products?.[1]?.title || '',
+      desc: t.solutions.solutionsPage?.products?.[1]?.desc || '',
+      learnMore: t.solutions.solutionsPage?.products?.[1]?.learnMore || '',
       image: '/images/solution-nexus.jpg',
       hasAIBadge: false,
     },
     {
-      title: t.solutions.solutionsPage.products[2].title,
-      desc: t.solutions.solutionsPage.products[2].desc,
-      learnMore: t.solutions.solutionsPage.products[2].learnMore,
+      title: t.solutions.solutionsPage?.products?.[2]?.title || '',
+      desc: t.solutions.solutionsPage?.products?.[2]?.desc || '',
+      learnMore: t.solutions.solutionsPage?.products?.[2]?.learnMore || '',
       image: '/images/solution-synapse.jpg',
       hasAIBadge: false,
     },
     {
-      title: t.solutions.solutionsPage.products[3].title,
-      desc: t.solutions.solutionsPage.products[3].desc,
-      learnMore: t.solutions.solutionsPage.products[3].learnMore,
+      title: t.solutions.solutionsPage?.products?.[3]?.title || '',
+      desc: t.solutions.solutionsPage?.products?.[3]?.desc || '',
+      learnMore: t.solutions.solutionsPage?.products?.[3]?.learnMore || '',
       image: '/images/solution-quantum.jpg',
       hasAIBadge: false,
     },
@@ -97,10 +97,10 @@ export function SolutionsContent() {
                   <div className="flex flex-col gap-6 px-4 py-10 text-center @[480px]:gap-8 items-center">
                     <div className="flex flex-col gap-2">
                       <h1 className="text-foreground text-4xl font-bold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                        {t.solutions.solutionsPage.hero.title}
+                        {t.solutions.solutionsPage?.hero?.title || ''}
                       </h1>
                       <h2 className="text-muted-foreground text-base font-normal leading-normal @[480px]:text-lg">
-                        {t.solutions.solutionsPage.hero.subtitle}
+                        {t.solutions.solutionsPage?.hero?.subtitle || ''}
                       </h2>
                     </div>
                   </div>
@@ -143,15 +143,15 @@ export function SolutionsContent() {
                   >
                     <div className="flex flex-col items-center gap-2">
                       <h1 className="max-w-[720px] text-3xl font-bold leading-tight tracking-tight text-foreground @[480px]:text-4xl @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                        {t.solutions.solutionsPage.cta.title}
+                        {t.solutions.solutionsPage?.cta?.title || ''}
                       </h1>
                       <p className="max-w-[720px] text-base font-normal leading-normal text-muted-foreground">
-                        {t.solutions.solutionsPage.cta.subtitle}
+                        {t.solutions.solutionsPage?.cta?.subtitle || ''}
                       </p>
                     </div>
                     <div className="flex justify-center">
                       <Button size="lg" className="min-w-[120px]">
-                        {t.solutions.solutionsPage.cta.button}
+                        {t.solutions.solutionsPage?.cta?.button || ''}
                       </Button>
                     </div>
                   </motion.div>

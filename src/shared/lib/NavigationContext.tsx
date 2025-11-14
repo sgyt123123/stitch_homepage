@@ -9,7 +9,7 @@ interface NavigationProviderProps {
 
 export function NavigationProvider({ children }: NavigationProviderProps) {
   const [currentSection, setCurrentSection] = useState(0)
-  const scrollableRef = useRef<{ scrollToSection: (index: number) => void }>(null)
+  const scrollableRef = useRef<{ scrollToSection: (index: number) => void } | null>(null)
 
   // ✓ 使用 useCallback 缓存函数，避免子组件不必要的重新渲染
   const scrollToSection = useCallback((sectionIndex: number) => {

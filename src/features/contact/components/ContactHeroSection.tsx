@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeInUp } from '@/shared/lib/animations'
 
-export function ContactHeroSection({ t }) {
+export function ContactHeroSection({ t }: { t: any }) {
   return (
     <motion.div className="flex flex-wrap justify-between gap-3 p-4 text-center" {...fadeInUp}>
       <div className="flex w-full flex-col items-center gap-3">

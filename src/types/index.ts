@@ -15,7 +15,7 @@ export interface NavigationContextValue {
   currentSection: number
   scrollToSection: (index: number) => void
   handleSectionChange: (index: number) => void
-  scrollableRef: React.RefObject<{ scrollToSection: (index: number) => void }>
+  scrollableRef: React.RefObject<{ scrollToSection: (index: number) => void } | null>
 }
 
 // 主题相关类型
@@ -73,6 +73,24 @@ export interface LocaleData {
       title: string
       desc: string
     }>
+    solutionsPage?: {
+      hero: {
+        title: string
+        subtitle: string
+      }
+      products: Array<{
+        title: string
+        desc: string
+        learnMore: string
+        image: string
+      }>
+      cta: {
+        title: string
+        subtitle: string
+        button: string
+      }
+    }
+    [key: string]: any
   }
   aboutPage: {
     hero: {
@@ -170,6 +188,7 @@ export interface LocaleData {
     team: {
       subtitle: string
       title: string
+      description: string
       members: Array<{
         name: string
         role: string
@@ -177,21 +196,25 @@ export interface LocaleData {
         avatar: string
       }>
     }
+    mission?: {
+      title: string
+      description: string
+      quote: string
+      author: string
+    }
+    journey?: {
+      title: string
+      timeline: Array<{
+        year: string
+        title: string
+        desc: string
+      }>
+    }
+    [key: string]: any
   }
 }
 
-// 动画相关类型
-export interface AnimationVariant {
-  initial?: Record<string, string | number>
-  animate?: Record<string, string | number | object>
-  whileInView?: Record<string, string | number>
-  whileHover?: Record<string, string | number>
-  whileTap?: Record<string, string | number>
-  viewport?: Record<string, string | number | boolean>
-  transition?: Record<string, string | number | boolean | object>
-  exit?: Record<string, string | number>
-  [key: string]: string | number | boolean | object | undefined
-}
+// 动画相关类型已移除，使用 Framer Motion 原生 Variant 类型
 
 // 机器人场景类型
 export interface RobotScene {

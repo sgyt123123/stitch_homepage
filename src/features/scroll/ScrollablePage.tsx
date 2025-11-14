@@ -88,9 +88,9 @@ const ScrollHint = ({ t }: { t: any }) => (
 export function ScrollablePage() {
   const [currentSection, setCurrentSection] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
-  const containerRef = useRef(null)
-  const sectionRefs = useRef([])
-  const observerRef = useRef(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const sectionRefs = useRef<(HTMLElement | null)[]>([])
+  const observerRef = useRef<IntersectionObserver | null>(null)
   const { t } = useLanguage()
   const { handleSectionChange, scrollableRef } = useNavigation()
 
@@ -103,7 +103,7 @@ export function ScrollablePage() {
 
   // 滚动到指定section
   const scrollToSection = useCallback(
-    (index) => {
+    (index: number) => {
       if (isScrolling || !sectionRefs.current[index]) return
 
       setIsScrolling(true)
@@ -112,13 +112,13 @@ export function ScrollablePage() {
       const container = containerRef.current
 
       if (container && targetElement) {
-        const containerRect = container.getBoundingClientRect()
-        const targetRect = targetElement.getBoundingClientRect()
-        const scrollTop = container.scrollTop
+        const containerRect = (container as HTMLElement).getBoundingClientRect()
+        const targetRect = (targetElement as HTMLElement).getBoundingClientRect()
+        const scrollTop = (container as HTMLElement).scrollTop
 
         const targetScrollTop = scrollTop + (targetRect.top - containerRect.top)
 
-        container.scrollTo({
+        ;(container as HTMLElement).scrollTo({
           top: targetScrollTop,
           behavior: 'smooth',
         })
@@ -140,7 +140,7 @@ export function ScrollablePage() {
     if (!container || sectionRefs.current.length === 0) return
 
     if (observerRef.current) {
-      observerRef.current.disconnect()
+      observerRef.current?.disconnect()
     }
 
     observerRef.current = new IntersectionObserver(
@@ -173,7 +173,7 @@ export function ScrollablePage() {
     )
 
     sectionRefs.current.forEach((sectionRef) => {
-      if (sectionRef) {
+      if (sectionRef && observerRef.current) {
         observerRef.current.observe(sectionRef)
       }
     })
@@ -187,7 +187,7 @@ export function ScrollablePage() {
 
   // 键盘导航
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' && currentSection < sections.length - 1) {
         e.preventDefault()
         scrollToSection(currentSection + 1)
@@ -210,7 +210,7 @@ export function ScrollablePage() {
           return (
             <section
               key={section.id}
-              ref={(el) => {
+              ref={(el: HTMLElement | null) => {
                 sectionRefs.current[index] = el
               }}
               className="w-full min-h-screen flex-shrink-0 relative"

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select'
 import { fadeInLeft } from '@/shared/lib/animations'
 
-export function ContactForm({ t }) {
+export function ContactForm({ t }: { t: any }) {
   return (
     <motion.div
       className="lg:col-span-2"
@@ -57,7 +57,7 @@ export function ContactForm({ t }) {
                   <SelectValue placeholder={t.contactPage.form.topics[0]} />
                 </SelectTrigger>
                 <SelectContent>
-                  {t.contactPage.form.topics.map((topic, index) => (
+                  {t.contactPage.form.topics.map((topic: any, index: number) => (
                     <SelectItem key={index} value={topic}>
                       {topic}
                     </SelectItem>
