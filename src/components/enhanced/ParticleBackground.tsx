@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 // --- 性能优化常量 ---
 const MOUSE_INTERACTION_RADIUS = 150
-const MOUSE_REPEL_FORCE = 0.15
+const MOUSE_REPEL_FORCE = 0.1
 const MOUSE_FPS_LIMIT = 120 // 鼠标移动节流 FPS
 const MOUSE_THROTTLE_INTERVAL = 1000 / MOUSE_FPS_LIMIT
 

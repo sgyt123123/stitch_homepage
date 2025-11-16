@@ -3,6 +3,7 @@ import { AnimatedButton } from '@/components/enhanced'
 import { Badge } from '@/components/ui/badge'
 import { SplineScene } from '@/components/ui/splite'
 import { fadeInUpLarge, staggerContainer } from '@/shared/lib/animations'
+import { Play, Video } from 'lucide-react'
 import type React from 'react'
 import type { LocaleData, PartnerLogoProps } from '@/types'
 
@@ -73,6 +74,7 @@ export function HeroSection({
                   className="shadow-2xl hover:shadow-2xl transition-shadow bg-primary/95 hover:bg-primary backdrop-blur-sm border-0 pointer-events-auto z-20 relative"
                   withShimmer
                 >
+                  <Play className="w-4 h-4" />
                   {t.hero.demo}
                 </AnimatedButton>
                 <AnimatedButton
@@ -81,6 +83,7 @@ export function HeroSection({
                   className="shadow-xl hover:shadow-2xl hover:bg-accent/90 backdrop-blur-sm border-border/50 bg-background/80 pointer-events-auto z-20 relative"
                   withShimmer
                 >
+                  <Video className="w-4 h-4" />
                   {t.hero.video}
                 </AnimatedButton>
               </motion.div>
