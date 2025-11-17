@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* 优化：提升背景亮度，减少眼睛疲劳 */
+    --background: 222 47% 11%; /* 从 4.9% 提升到 11% */
+    --foreground: 210 40% 98%;
+
+    /* 优化：增加卡片对比度 */
+    --card: 217 32% 17%; /* 从 12% 提升到 17% */
+    --card-foreground: 210 40% 98%;
+
+    /* 优化：Popover 对比度 */
+    --popover: 217 32% 15%; /* 从 10% 提升到 15% */
+    --popover-foreground: 210 40% 98%;
+
+    /* 优化：增强主色亮度，提升可见性 */
+    --primary: 199 89% 58%; /* 从 48% 提升到 58% */
+    --primary-foreground: 0 0% 100%;
+
+    /* 优化：Secondary 对比度 */
+    --secondary: 217 32% 20%; /* 从 17.5% 提升到 20% */
+    --secondary-foreground: 210 40% 98%;
+
+    /* 优化：Muted 对比度 */
+    --muted: 217 32% 20%; /* 从 17.5% 提升到 20% */
+    --muted-foreground: 215 20.2% 75%; /* 从 70% 提升到 75% */
+
+    /* 优化：Accent 对比度 */
+    --accent: 217 32% 20%; /* 从 17.5% 提升到 20% */
+    --accent-foreground: 210 40% 98%;
+
+    /* 保持 Destructive 原样 */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* 优化：提升边框可见性 */
+    --border: 217 32% 28%; /* 从 22% 提升到 28% */
+    --input: 217 32% 22%; /* 从 17.5% 提升到 22% */
+
+    /* 优化：Ring 颜色 */
+    --ring: 212 72% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* 隐藏滚动条但保持滚动功能 */
+  /* WebKit浏览器（Chrome, Safari, Edge） */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* IE和Edge */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  scrollbar-width: none;
+}
